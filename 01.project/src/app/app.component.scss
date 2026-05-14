@@ -1,9 +1,58 @@
+/* src/styles.css */
+
+/* Minimal reset for the whole app */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* Angular's root component tag usually needs to fill the height too */
+app-root {
+    display: block;
+    height: 100%;
+}
+
 #screen {
     display: flex;
     justify-content: space-between;
+    height: 100vh;
+    background-color: yellow;
+}
+
+
+#main {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#sidebar {
+    background: #58DBA9;
+    flex-grow: 1;
 }
 
 #content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    background: #c4c4c4;
+    flex: 10;
+    padding: 1.5rem;
+}
+
+
+#navbar {
+    background: #58CCDB;
+    flex: 1;
+}
+
+
+.rectangule {
+    background: #ef31ac;
 }
