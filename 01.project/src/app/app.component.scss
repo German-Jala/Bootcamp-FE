@@ -16,12 +16,22 @@ app-root {
     display: block;
     height: 100%;
 }
+#out-screen {
+    background-color: cyan;
+    height: 100vh;
+    display: float;
+    position: relative;
+}
+
 
 #screen {
+    position: absolute;
+    height: 70%;
+    width: 70%;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
-    height: 100vh;
-    background-color: yellow;
 }
 
 
@@ -48,7 +58,13 @@ app-root {
 
 
 #navbar {
-    background: #58CCDB;
+    // background: #58CCDB;
+    background-color: #ba98f8;
+    flex: 1;
+}
+
+#second-navbar {
+    background: #881bbb;
     flex: 1;
 }
 

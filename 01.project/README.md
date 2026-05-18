@@ -49,3 +49,7 @@ I could find a solution, but I remember that I could use flex column and the com
 I try to put 0 padding and margin in body and html tags, I know that I could use and library, but I need something little
 In Angular
 ```
+
+```
+Explain me about relative and absolute solutions in css elements, using of positions
+```
