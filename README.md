@@ -34,3 +34,16 @@ Importance in Accessibility: If a user has visual impairments and changes their 
 ---
 
 # Other Size CSS Units
+## em (Relative to the parent element)
+How it works: Measures the font size of the element itself or its closest ancestor. If the text in a container is 16px, 1em in that container is 16px. If you increase the text to 20px, 1em becomes 20px.
+
+* Ideal use case: Modular components. If you create a button and define its padding and border-radius in em, the button will maintain its perfect proportions whether you make it huge for a banner or tiny for a footer. You only change the font-size, and the entire button scales harmoniously.
+
+* Beware of: The "cascade effect." If you nest elements with em (a div inside another div with font-size: 1.2em), the sizes multiply exponentially, and the text can quickly become either huge or invisible.
+
+---
+
+## ch (The width of the character "0")
+How it works: This is equivalent to the width of the number zero (0) in the font you are currently using.
+
+* Ideal use case: Readability. Web design studies indicate that a line of text is optimally readable when it has between 45 and 75 characters. By setting a paragraph to max-width: 60ch;, you ensure that the line of text never exceeds approximately 60 characters in width, regardless of screen size or font.
