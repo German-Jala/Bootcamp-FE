@@ -62,12 +62,21 @@ Managing Event Listeners
   <div>
     <strong>Ingredients:</strong>
     <ul>
-      @for(ingredient of currentRecipe().ingredients; track $index) {
+      @for(ingredient of adjustedIngredients(); track $index) {
       <li>
         {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
       </li>
       }
-
     </ul>
+    <h2>Update in Signals</h2>
+    <button (click)="updateServingQuantity(+1)">
+      +1
+    </button>
+    <p>
+      Total Servings: {{ servings() }}
+    </p>
+    <button (click)="updateServingQuantity(-1)">
+      -1
+    </button>
   </div>
 </div>
