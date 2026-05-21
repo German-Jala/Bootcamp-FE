@@ -29,3 +29,45 @@ Managing Event Listeners
     Caprese Salad
   </button>
 </div>
+
+<h2>
+  Phase 2 Module 1, Set in Signals
+</h2>
+<p>
+  our goal is to connect real recipe data to your application state. Import the RecipeModel interface and MOCK_RECIPES
+  data into your main component. Then, initialize a new recipe signal with the first mock recipe. Finally, update your
+  button click handlers so that clicking the "Spaghetti Carbonara" or "Caprese Salad" buttons dynamically swaps the
+  active recipe state using the .set() method, and display the active recipe's name and description in your UI.
+</p>
+<div>
+  <button (click)="setRecipe(recipes()[0])">
+    Spaghetti Carbonara
+  </button>
+  <button (click)="setRecipe(recipes()[1])">
+    Caprese Salad
+  </button>
+</div>
+
+<h3>
+  Current Recipe
+</h3>
+<hr>
+<div>
+  <div>
+    <strong>Name:</strong> {{ currentRecipe().name }}
+  </div>
+  <div>
+    <strong>Description:</strong> {{ currentRecipe().description }}
+  </div>
+  <div>
+    <strong>Ingredients:</strong>
+    <ul>
+      @for(ingredient of currentRecipe().ingredients; track $index) {
+      <li>
+        {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
+      </li>
+      }
+
+    </ul>
+  </div>
+</div>
