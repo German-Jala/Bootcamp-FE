@@ -67,7 +67,16 @@ Managing Event Listeners
         {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
       </li>
       }
-
     </ul>
+    <h2>Update in Signals</h2>
+    <button (click)="updateServingQuantity(+1)">
+      +1
+    </button>
+    <p>
+      Total Servings: {{ servings() }}
+    </p>
+    <button (click)="updateServingQuantity(-1)">
+      -1
+    </button>
   </div>
 </div>
