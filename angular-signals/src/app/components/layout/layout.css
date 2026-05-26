@@ -1,0 +1,34 @@
+#screen {
+    min-height: 100dvh;
+    background: blue;
+
+    display: grid;
+    grid-template-areas: 
+        "sidebar header header header"
+        "sidebar navbar navbar navbar"
+        "sidebar main main main"
+        "sidebar main main main"
+        "sidebar main main main"
+        "sidebar main main main"
+    ;
+}
+
+#header {
+    background: yellow;
+    grid-area: header;
+}
+
+#navbar {
+    background: pink;
+    grid-area: navbar;
+}
+
+#sidebar {
+    background: green;
+    grid-area: sidebar;
+}
+
+#main {
+    background: red;
+    grid-area: main;
+}
