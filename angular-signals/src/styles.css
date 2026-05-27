@@ -4,3 +4,8 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root {
+    --color-blue: #0b2857;
+    --color-white: #f8fafc;
+    --color-dark: #0f172a;
+}

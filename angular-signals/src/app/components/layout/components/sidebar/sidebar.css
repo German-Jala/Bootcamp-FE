@@ -1,0 +1,35 @@
+:host {
+    display: block;
+    width: 100%;
+    background: var(--color-dark);
+    grid-area: sidebar;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    padding: 1em;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+:host-context(.collapse-sidebar) .sidebar-item>a>span {
+    display: none;
+}
+
+.sidebar-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    :host-context(.non-collapse-sidebar) .sidebar-item>a>span {
+        display: none;
+    }
+}

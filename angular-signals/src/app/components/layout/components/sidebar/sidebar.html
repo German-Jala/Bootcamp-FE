@@ -1,0 +1,27 @@
+<div class="sidebar">
+    @if(userRole() == 'admin') {
+    <div (click)="onClickCollapse()" class="sidebar-item">
+        <a>
+            <img src="icons/sandwich-menu.svg" alt="Mi Ícono" class="sandwich-menu" />
+        </a>
+    </div>
+    }
+    <div class="sidebar-item">
+        <a>
+            <img src="icons/star.svg" alt="Mi Ícono" class="sandwich-menu" />
+            <span>Favorites</span>
+        </a>
+    </div>
+    <div class="sidebar-item">
+        <a>
+            <img src="icons/settings.svg" alt="Mi Ícono" class="sandwich-menu" />
+            <span>Settings</span>
+        </a>
+    </div>
+    <div class="sidebar-item">
+        <a>
+            <img src="icons/add.svg" alt="Mi Ícono" class="sandwich-menu" />
+            <span>Add</span>
+        </a>
+    </div>
+</div>

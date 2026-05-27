@@ -1,8 +1,17 @@
-<div id="screen">
-    <div id="header"></div>
-    <div id="navbar"></div>
-    <div id="sidebar"></div>
+<div id="screen" [ngClass]="isSidebarCollapse() ? 'collapse-sidebar' : 'non-collapse-sidebar'">
+    <app-header></app-header>
+    <app-navbar></app-navbar>
+    <app-sidebar [setUserRole]="userRole()" [setIsSidebarCollapse]="isSidebarCollapse()"
+        (handleOnClickCollapse)="toogleSidebarCollapse()"></app-sidebar>
     <div id="main">
+        <div>
+            <button (click)="changeUserRole('admin')">
+                admin
+            </button>
+            <button (click)="changeUserRole('normal')">
+                normal
+            </button>
+        </div>
         <ng-content></ng-content>
     </div>
 </div>

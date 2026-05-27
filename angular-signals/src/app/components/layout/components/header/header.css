@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    width: 100%;
+    background: var(--color-blue);
+    grid-area: header;
+}
+
+a{
+    display: block;
+}
+
+.header {
+    display: flex;
+    height: 100%; /* QUESTION: FATHER FLEX VS HEIGHT */
+    padding: 0em 1em;
+    align-items: center;
+}
