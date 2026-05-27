@@ -2,12 +2,12 @@
     min-height: 100dvh;
     display: grid;
     grid-template-areas:
-        "sidebar header header"
-        "sidebar navbar navbar"
+        "header header header"
+        "navbar navbar navbar"
         "sidebar main main"
     ;
     grid-template-rows: 0.5fr 0.5fr 4fr;
-    transition: grid-template-columns 0.3s ease, transform 0.4s ease-in-out;
+    transition: grid-template-columns 0.2s ease, transform 0.4s ease-in-out;
     color: var(--color-white);
 }
 

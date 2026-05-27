@@ -32,4 +32,7 @@ a {
     :host-context(.non-collapse-sidebar) .sidebar-item>a>span {
         display: none;
     }
+    .sidebar-item-sandwich {
+        display: none;
+    }
 }
