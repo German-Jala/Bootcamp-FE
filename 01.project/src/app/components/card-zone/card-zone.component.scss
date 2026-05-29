@@ -1,4 +1,4 @@
-#card-zone {
+.card-zone {
     background: rgb(240, 240, 240);
     height: 100%;
     display: flex;
@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-#card-space {
+.card-space {
     word-break: break-all;
     flex: 1;
     background: purple;
@@ -23,6 +23,7 @@
 
 .no-border {
     border: 0px;
+    padding: 0px;
 }
 
 .internal-full-width {

@@ -1,7 +1,10 @@
-#monster-grid {
+.monster-grid {
     display: grid;
     height: 80%;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    padding: 3px;
+    background-color: white;
+    gap: 3px;
     align-content: center;
 }

@@ -1,11 +1,12 @@
 <div
-    id="card-zone"
-    [ngClass]="isThereBorder() ? 'border' : 'no-border'"
-    [ngClass]="isThereInternalFullWidth() ? 'internal-full-width' : 'no-internal-full-width'"
+    class="card-zone"
+    [ngClass]="[
+        isThereInternalFullWidth() ? 'internal-full-width' : 'no-internal-full-width',
+        isThereBorder() ? 'border' : 'no-border'
+    ]"
 >
     <div
-        id="card-space"
-        [ngClass]="isThereBorder() ? 'border' : 'no-border'"
+        class="card-space border"
     >
         {{ name() }}
     </div>
