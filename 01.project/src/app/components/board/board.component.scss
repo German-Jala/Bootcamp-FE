@@ -1,0 +1,111 @@
+#board {
+    background-color: red;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+#p2-board {
+    background-color: green;
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 0.85fr 0.85fr 1fr 1fr 1fr 1fr 1fr 0.85fr 0.85fr;
+    grid-template-rows: repeat(3, 1fr);
+
+    grid-template-areas:
+        ". p2-deck-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-special-deck-zone ."
+        ". p2-red-pendulum-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-blue-pendulum-zone ."
+        "p2-banish-zone p2-graveyard-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-monster-zone p2-field-zone ."
+    ;
+}
+
+#p1-board {
+    background-color: green;
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 0.85fr 0.85fr 1fr 1fr 1fr 1fr 1fr 0.85fr 0.85fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        ". p1-field-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-graveyard-zone p1-banish-zone"
+        ". p1-blue-pendulum-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-red-pendulum-zone ."
+        ". p1-special-deck-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-monster-zone p1-deck-zone ."
+    ;
+}
+
+
+#p1-board {
+    background-color: yellow;
+    flex: 1;
+}
+
+#p2-deck-zone {
+    grid-area: p2-deck-zone;
+}
+
+#p2-blue-pendulum-zone {
+    grid-area: p2-blue-pendulum-zone;
+}
+
+#p2-graveyard-zone {
+    grid-area: p2-graveyard-zone;
+}
+
+#p2-banish-zone {
+    grid-area: p2-banish-zone;
+}
+
+#p2-monster-zone {
+    grid-area: p2-monster-zone;
+}
+
+#p2-special-deck-zone {
+    grid-area: p2-special-deck-zone;
+}
+
+#p2-red-pendulum-zone {
+    grid-area: p2-red-pendulum-zone;
+}
+
+#p2-field-zone {
+    grid-area: p2-field-zone;
+}
+
+#p1-deck-zone {
+    grid-area: p1-deck-zone;
+}
+
+#p1-blue-pendulum-zone {
+    grid-area: p1-blue-pendulum-zone;
+}
+
+#p1-graveyard-zone {
+    grid-area: p1-graveyard-zone;
+}
+
+#p1-banish-zone {
+    grid-area: p1-banish-zone;
+}
+
+#p1-monster-zone {
+    grid-area: p1-monster-zone;
+}
+
+#p1-field-zone {
+    grid-area: p1-field-zone;
+}
+
+#p1-special-deck-zone {
+    grid-area: p1-special-deck-zone;
+}
+
+#p1-red-pendulum-zone {
+    grid-area: p1-red-pendulum-zone;
+}
+
+#p1-monster-zone, #p2-monster-zone {
+    align-content: center;
+}

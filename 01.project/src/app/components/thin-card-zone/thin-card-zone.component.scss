@@ -1,0 +1,21 @@
+#card-zone {
+    background: rgb(240, 240, 240);
+    height: 100%;
+    display: flex;
+    padding: 3px;
+    box-sizing: border-box;
+    border: 1.7px solid rgba(0, 0, 0, 0.908);
+    width: 95%;
+}
+
+#card-space {
+    word-break: break-all;
+    border: 1px solid rgba(0, 0, 0, 0.908);
+    flex: 1;
+    background: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(240, 240, 240);
+}

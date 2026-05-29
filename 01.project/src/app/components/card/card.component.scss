@@ -1,0 +1,77 @@
+.card-content {
+    height: 100dvh;
+    background: rgb(0, 0, 205);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-between;
+
+
+
+    padding: 1em 1em 0.5em 1em; // QUESTION
+}
+
+.header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    justify-content: space-between;
+}
+
+.title {
+    flex: 2;
+}
+
+.stars {
+    flex: 1;
+    margin: 0 var(--card-middle-margin);
+}
+
+
+.body {
+    flex: 5;
+    display: flex;
+    margin: 0 var(--card-middle-margin);
+}
+
+.image {
+    flex: 1;
+}
+
+.footer {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 0.4em;
+}
+
+.effect {
+    flex: 4;
+}
+
+.stats {
+    flex: 1;
+}
+
+.strong-border {
+    border: 3.5px solid;
+}
+
+.medium-border {
+    border: 3px solid;
+}
+
+.thin-border {
+    border: 2px solid;
+}
+
+.cyan-border {
+    border-color: rgb(44, 238, 238);
+}
+
+.magent-border {
+    border-color: rgb(186, 11, 148);
+}

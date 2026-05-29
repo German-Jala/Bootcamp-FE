@@ -1,0 +1,7 @@
+#monster-grid {
+    display: grid;
+    height: 80%;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-content: center;
+}
