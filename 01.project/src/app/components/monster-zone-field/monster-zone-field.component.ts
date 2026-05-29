@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardZoneComponent } from "../thin-card-zone/thin-card-zone.component";
+import { CardZoneComponent } from '../card-zone/card-zone.component';
 
 @Component({
   selector: 'app-monster-zone-field',

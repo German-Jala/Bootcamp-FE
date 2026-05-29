@@ -4,13 +4,10 @@
     display: flex;
     padding: 3px;
     box-sizing: border-box;
-    border: 1.7px solid rgba(0, 0, 0, 0.908);
-    width: 95%;
 }
 
 #card-space {
     word-break: break-all;
-    border: 1px solid rgba(0, 0, 0, 0.908);
     flex: 1;
     background: purple;
     display: flex;
@@ -19,3 +16,19 @@
     text-align: center;
     color: rgb(240, 240, 240);
 }
+
+.border {
+    border: 2px solid rgba(0, 0, 0, 0.908);
+}
+
+.no-border {
+    border: 0px;
+}
+
+.internal-full-width {
+    width: 100%;
+}
+.no-internal-full-width {
+    width: 90%;
+}
+
