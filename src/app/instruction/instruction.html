@@ -1,25 +1,39 @@
 <h2>
-    Phase 3 Module 8
+    Phase 3 Module 8: Component Inputs with Signals
 </h2>
 
 <h4>
     Project Exercise
 </h4>
 <p>
-    <strong>Objective:</strong> Your goal is to perform a refactoring. Move all recipe-specific state (the recipes list,
-    current recipe,
-    servings, adjusted ingredients) and all associated methods and template markup out of the root App component and
-    into
-    the newly generated RecipeList component. The root App component should then import and render the RecipeList
-    component, leaving App's template clean.
-</p>
-<p>
-    <strong>Expected Outcome:</strong> When you are finished, the web preview should look and function exactly as it did
-    before (selecting
-    recipes and adjusting servings still works). However, the root
+    <strong>Objective:</strong> Your goal is to separate the detailed view of a recipe from the list view.
 
-    <code>src/app/app.html</code>
-    template will contain only the selector {{ "<" + "app-recipe-list>" }}, and the root component class in
-        src/app/app.ts will be virtually empty, serving as a clean container for your new nested component. Give it a
-        shot! Let me know when you're ready for me to check your work, or if you need a hint or a detailed step-by-step
-        guide. </p>
+</p>
+<ol>
+    <li>
+        Define a required recipe input of type RecipeModel in the new RecipeDetail component using the signal input()
+        API.
+    </li>
+    <li>
+        Move the servings state (servings signal), the ingredient recalculation logic (adjustedIngredients computed
+        signal),
+        and the servings adjustment helper method from RecipeList into RecipeDetail, making them local to the detail
+        component.
+    </li>
+    <li>
+        Move the HTML markup that renders the recipe details (name, description, image, servings, and ingredients) from
+        RecipeList's template to RecipeDetail's template.
+    </li>
+    <li>
+        Finally, nest {{ "<" + "app-recipe-detail>" }} inside your RecipeList template and pass the active recipe to it
+            using property binding. </li>
+</ol>
+<p>
+    <strong>Expected Outcome:</strong>
+    When you are finished, the application should function exactly as before:
+    clicking between recipe buttons should swap the active recipe details, and adjusting the servings should recalculate
+    ingredient amounts. However, your code is now highly modular: RecipeList only handles recipe selection, while
+    RecipeDetail manages the servings adjustment and detailed display. Give it a shot! Let me know when you're ready for
+    me to check your work, or if you need a hint! (Also, if you have a moment, let me know your experience level on a
+    scale of 1-10 so I can calibrate my future lessons).
+</p>
