@@ -1,0 +1,46 @@
+<h3>
+    Current Recipe
+</h3>
+<hr>
+<div>
+    <div>
+        <button (click)="setRecipe(recipes()[0])">
+            Spaghetti Carbonara
+        </button>
+        <button (click)="setRecipe(recipes()[1])">
+            Caprese Salad
+        </button>
+    </div>
+    <div>
+        <strong>Image:</strong>
+    </div>
+    <div>
+        <img [src]="currentRecipe().imgUrl" alt="">
+    </div>
+    <div>
+        <strong>Name:</strong> {{ currentRecipe().name }}
+    </div>
+    <div>
+        <strong>Description:</strong> {{ currentRecipe().description }}
+    </div>
+    <div>
+        <strong>Ingredients:</strong>
+        <ul>
+            @for(ingredient of adjustedIngredients(); track $index) {
+            <li>
+                {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
+            </li>
+            }
+        </ul>
+        <h2>Update in Signals</h2>
+        <button (click)="updateServingQuantity(+1)">
+            +1
+        </button>
+        <p>
+            Total Servings: {{ servings() }}
+        </p>
+        <button (click)="updateServingQuantity(-1)">
+            -1
+        </button>
+    </div>
+</div>

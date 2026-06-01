@@ -3,9 +3,11 @@ export interface Ingredient {
     quantity: number;
     unit: string;
 }
+
 export interface RecipeModel {
     id: number;
     name: string;
     description: string;
+    imgUrl: string; // Add this line
     ingredients: Ingredient[];
 }
