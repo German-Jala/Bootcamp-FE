@@ -1,67 +1,73 @@
-<div id="board">
-    <div id="p2-board">
-        <div id="p2-deck-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-deck-zone'">
+<div class="board">
+    <div class="player-board"
+        [ngStyle]="{ 'background-image': 'url(' + player1Background() + ')' }"
+    >
+        <div class="deck-zone thin-form-zone">
+            <app-card-zone [name]="'deck-zone'">
             </app-card-zone>
         </div>
-        <div id="p2-blue-pendulum-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-blue-pendulum-zone'">
+        <div class="blue-pendulum-zone thin-form-zone">
+            <app-card-zone [name]="'blue-pendulum-zone'">
             </app-card-zone>
         </div>
-        <div id="p2-graveyard-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-graveyard-zone'">
+        <div class="graveyard-zone thin-form-zone">
+            <app-card-zone [name]="'graveyard-zone'">
             </app-card-zone>
         </div>
-        <div id="p2-banish-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-banish-zone'">
+        <div class="banish-zone thin-form-zone">
+            <app-card-zone [name]="'banish-zone'">
             </app-card-zone>
         </div>
-        <div id="p2-monster-zone">
-            <app-monster-zone-field></app-monster-zone-field>
+        <div class="monster-zone">
+            <app-monster-zone-field>
+            </app-monster-zone-field>
         </div>
-        <div id="p2-special-deck-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-special-deck-zone'">
+        <div class="special-deck-zone thin-form-zone">
+            <app-card-zone [name]="'special-deck-zone'">
             </app-card-zone>
         </div>
-        <div id="p2-red-pendulum-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-red-pendulum-zone'">
+        <div class="red-pendulum-zone thin-form-zone">
+            <app-card-zone [name]="'red-pendulum-zone'">
             </app-card-zone>
         </div>
-        <div id="p2-field-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p2-field-zone'">
+        <div class="field-zone thin-form-zone">
+            <app-card-zone [name]="'field-zone'">
             </app-card-zone>
         </div>
     </div>
-    <div id="p1-board">
-        <div id="p1-deck-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-deck-zone'">
+    <div class="player-board rotated-board"
+        [ngStyle]="{ 'background-image': 'url(' + player2Background() + ')' }"
+    >
+        <div class="deck-zone thin-form-zone">
+            <app-card-zone [name]="'deck-zone'">
             </app-card-zone>
         </div>
-        <div id="p1-blue-pendulum-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-blue-pendulum-zone'">
+        <div class="blue-pendulum-zone thin-form-zone">
+            <app-card-zone [name]="'blue-pendulum-zone'">
             </app-card-zone>
         </div>
-        <div id="p1-graveyard-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-graveyard-zone'">
+        <div class="graveyard-zone thin-form-zone">
+            <app-card-zone [name]="'graveyard-zone'">
             </app-card-zone>
         </div>
-        <div id="p1-banish-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-banish-zone'">
+        <div class="banish-zone thin-form-zone">
+            <app-card-zone [name]="'banish-zone'">
             </app-card-zone>
         </div>
-        <div id="p1-monster-zone">
-            <app-monster-zone-field></app-monster-zone-field>
+        <div class="monster-zone">
+            <app-monster-zone-field>
+            </app-monster-zone-field>
         </div>
-        <div id="p1-special-deck-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-special-deck-zone'">
+        <div class="special-deck-zone thin-form-zone">
+            <app-card-zone [name]="'special-deck-zone'">
             </app-card-zone>
         </div>
-        <div id="p1-red-pendulum-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-red-pendulum-zone'">
+        <div class="red-pendulum-zone thin-form-zone">
+            <app-card-zone [name]="'red-pendulum-zone'">
             </app-card-zone>
         </div>
-        <div id="p1-field-zone" class="thin-form-zone">
-            <app-card-zone [name]="'p1-field-zone'">
+        <div class="field-zone thin-form-zone">
+            <app-card-zone [name]="'field-zone'">
             </app-card-zone>
         </div>
     </div>
