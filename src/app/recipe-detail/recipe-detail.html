@@ -1,29 +1,40 @@
-<div>
-    <img [src]="recipe().imgUrl" alt="">
-</div>
-<div>
-    <strong>Name:</strong> {{ recipe().name }}
-</div>
-<div>
-    <strong>Description:</strong> {{ recipe().description }}
-</div>
-<div>
-    <strong>Ingredients:</strong>
-    <ul>
-        @for(ingredient of adjustedIngredients(); track $index) {
-        <li>
-            {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
-        </li>
-        }
-    </ul>
-    <h2>Update in Signals</h2>
-    <button (click)="updateServingQuantity(+1)">
-        +1
-    </button>
-    <p>
-        Total Servings: {{ servings() }}
-    </p>
-    <button (click)="updateServingQuantity(-1)">
-        -1
-    </button>
+<div class="recipe-container">
+    <div class="recipe-title">
+        {{ recipe().name }}
+    </div>
+    <div>
+        <strong>Image:</strong>
+    </div>
+    <div>
+        <img [src]="recipe().imgUrl" alt="">
+    </div>
+    <div>
+        <strong>Description:</strong>
+        <span class="recipe-description">
+            {{ recipe().description }}
+        </span>
+    </div>
+    <div>
+        <strong>Ingredients:</strong>
+        <ul class="recipe-description">
+            @for(ingredient of adjustedIngredients(); track $index) {
+            <li>
+                {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
+            </li>
+            }
+        </ul>
+        <h2>Update in Signals</h2>
+        <div class="servings-control">
+            <button (click)="updateServingQuantity(+1)">
+                +1
+            </button>
+            <p>
+                Total Servings: {{ servings() }}
+            </p>
+            <button (click)="updateServingQuantity(-1)">
+                -1
+            </button>
+
+        </div>
+    </div>
 </div>

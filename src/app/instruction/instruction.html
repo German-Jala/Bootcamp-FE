@@ -1,39 +1,26 @@
 <h2>
-    Phase 3 Module 8: Component Inputs with Signals
+    Phase 3 Module 10: Styling Components
 </h2>
 
-<h4>
-    Project Exercise
-</h4>
 <p>
-    <strong>Objective:</strong> Your goal is to separate the detailed view of a recipe from the list view.
-
+    <strong>Objective:</strong> Your goal is to refactor your
+    <code>src/app/recipe-detail/recipe-detail.css</code>
+    stylesheet to improve the design of the recipe detail page. Use CSS Flexbox to structure the layout of the recipe
+    content (such as aligning the servings buttons or image blocks). Establish a clear visual hierarchy so that the
+    recipe
+    name is distinct (larger size/weight) compared to the description and ingredient text. Finally, add padding or
+    margin to
+    create whitespace, giving elements room to breathe.
 </p>
-<ol>
-    <li>
-        Define a required recipe input of type RecipeModel in the new RecipeDetail component using the signal input()
-        API.
-    </li>
-    <li>
-        Move the servings state (servings signal), the ingredient recalculation logic (adjustedIngredients computed
-        signal),
-        and the servings adjustment helper method from RecipeList into RecipeDetail, making them local to the detail
-        component.
-    </li>
-    <li>
-        Move the HTML markup that renders the recipe details (name, description, image, servings, and ingredients) from
-        RecipeList's template to RecipeDetail's template.
-    </li>
-    <li>
-        Finally, nest {{ "<" + "app-recipe-detail>" }} inside your RecipeList template and pass the active recipe to it
-            using property binding. </li>
-</ol>
 <p>
-    <strong>Expected Outcome:</strong>
-    When you are finished, the application should function exactly as before:
-    clicking between recipe buttons should swap the active recipe details, and adjusting the servings should recalculate
-    ingredient amounts. However, your code is now highly modular: RecipeList only handles recipe selection, while
-    RecipeDetail manages the servings adjustment and detailed display. Give it a shot! Let me know when you're ready for
-    me to check your work, or if you need a hint! (Also, if you have a moment, let me know your experience level on a
-    scale of 1-10 so I can calibrate my future lessons).
+    <strong>Expected Outcome:</strong> When you are finished, the recipe detail view will look polished and
+    well-structured in your
+    browser.
+    The text layout will be readable, the serving controls will be neatly aligned, and the overall spacing will look
+    professional and balanced.
+</p>
+<p>
+    Give it a shot! Open up your HTML and CSS files for the detail component, add the styling, and let me know when
+    you're
+    ready for me to check your work!
 </p>
