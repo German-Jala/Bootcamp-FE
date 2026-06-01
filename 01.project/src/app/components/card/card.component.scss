@@ -3,26 +3,24 @@
     padding: 0.6em;
     min-height: 100dvh;
     background: rgb(49, 49, 49);
+    display: flex;
 }
 
 .card-content {
-    height: 100%;
     background: rgb(235, 128, 29);
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    padding: 1em 1em 0.5em 1em; // QUESTION
+    padding: 1em 1em 1em 1em; // QUESTION
 }
 
-.header {
+.header-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 7px;
     justify-content: space-between;
-
 }
 
 .title {
@@ -32,6 +30,7 @@
     font-size: 1.5em;
     padding: 0.1em 0.7em;
     align-items: center;
+    text-transform: capitalize;
     box-shadow:
         3px 5px 3px rgb(0, 0, 0),
         -3px -5px 3px rgb(106, 106, 106);
@@ -42,6 +41,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    height: 1.2em;
+    width: 1.2em;
 }
 
 .stars {
@@ -59,7 +60,7 @@
 }
 
 .image-container {
-    flex: 5;
+    flex: 6;
     display: flex;
     margin: 0 var(--card-middle-margin);
     padding: 0.4em;
@@ -72,12 +73,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    // height: 58vh;
 }
 
 .footer-container {
     flex: 3;
-    display: block;
     padding: 0.4em 0.4em;
     margin: 0.4em 0 0 0;
     background: rgb(167, 59, 2);
@@ -89,6 +89,7 @@
     flex-direction: column;
     gap: 7px;
     background: rgb(253, 174, 101);
+    box-sizing: border-box;
     padding: 0.2em;
 }
 
@@ -102,6 +103,7 @@
 .stats {
     flex: 1;
     text-align: right;
+    border-top: 2px rgb(28, 28, 28) solid;
 }
 
 .strong-border {
