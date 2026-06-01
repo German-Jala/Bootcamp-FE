@@ -19,7 +19,9 @@
         <ul class="recipe-description">
             @for(ingredient of adjustedIngredients(); track $index) {
             <li>
-                {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
+                <span>
+                    {{ `${ingredient.name} - ${ingredient.quantity} ${ingredient.unit}` }}
+                </span>
             </li>
             }
         </ul>

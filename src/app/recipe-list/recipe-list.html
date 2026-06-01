@@ -5,9 +5,19 @@
 <div>
     <div>
         <button (click)="setRecipe(recipes()[0])">
+            @if (recipes()[0].isFavorite) {
+            <span>
+                ★
+            </span>
+            }
             Spaghetti Carbonara
         </button>
         <button (click)="setRecipe(recipes()[1])">
+            @if (recipes()[1].isFavorite) {
+            <span>
+                ★
+            </span>
+            }
             Caprese Salad
         </button>
     </div>

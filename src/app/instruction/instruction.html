@@ -1,26 +1,20 @@
 <h2>
-    Phase 3 Module 10: Styling Components
+    Phase 3 Module 12: Conditional Rendering with {{ "@if" }}
 </h2>
 
 <p>
-    <strong>Objective:</strong> Your goal is to refactor your
-    <code>src/app/recipe-detail/recipe-detail.css</code>
-    stylesheet to improve the design of the recipe detail page. Use CSS Flexbox to structure the layout of the recipe
-    content (such as aligning the servings buttons or image blocks). Establish a clear visual hierarchy so that the
-    recipe
-    name is distinct (larger size/weight) compared to the description and ingredient text. Finally, add padding or
-    margin to
-    create whitespace, giving elements room to breathe.
+    <strong>Objective:</strong> Your goal is to highlight favorite recipes. Open the
+    <code>src/app/recipe-list/recipe-list.html</code>
+    template and use Angular's {{ "@if" }} control flow block inside the recipe buttons (or list item tags) to
+    conditionally
+    render a visual indicator (like a star emoji '★' or 'Favorite' badge) next to the name of any recipe that has
+    isFavorite: true.
 </p>
 <p>
-    <strong>Expected Outcome:</strong> When you are finished, the recipe detail view will look polished and
-    well-structured in your
-    browser.
-    The text layout will be readable, the serving controls will be neatly aligned, and the overall spacing will look
-    professional and balanced.
-</p>
-<p>
-    Give it a shot! Open up your HTML and CSS files for the detail component, add the styling, and let me know when
-    you're
-    ready for me to check your work!
+    <strong>Expected Outcome:</strong> When you are finished, you should see a star indicator '★' next to the name
+    "Spaghetti Carbonara"
+    on its button in the sidebar, while "Caprese Salad" should have no indicator.
+
+    Give it a shot! Update your models, mock data, and template, and let me know when you're ready for me to check your
+    work!
 </p>
