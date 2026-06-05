@@ -9,4 +9,5 @@ import { Card } from '../../models/Card';
 })
 export class CardComponent {
   card = input<Card>();
+
 }

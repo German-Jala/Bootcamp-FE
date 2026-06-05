@@ -3,6 +3,7 @@
     padding: 0.6em;
     background: rgb(49, 49, 49);
     display: flex;
+    color: rgb(14, 14, 14);
 }
 
 .card-content {
@@ -69,9 +70,10 @@
 
 .image {
     flex: 1;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    height: 100px;
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: center;
 }
 
 .footer-container {
@@ -157,5 +159,37 @@
 
     .stats {
         font-size: 0.3em;
+    }
+}
+
+
+@container (min-width: 50px) {
+    .card-container div {
+        padding: 0.1em;
+        word-break: break-all;
+    }
+
+    .card-container .image-container {
+        flex: 3;
+    }
+
+    .card-container .image {
+        height: 3em;
+    }
+
+    .title {
+        font-size: 0.1em;
+    }
+
+    .type {
+        font-size: 0.1em;
+    }
+
+    .effect {
+        font-size: 0.1em;
+    }
+
+    .stats {
+        font-size: 0.2em;
     }
 }

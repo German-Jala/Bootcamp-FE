@@ -12,7 +12,11 @@ export class CardInfoService {
 
   getBanListCards() {
     const url = this.apiUrl + '?level=4&attribute=water&sort=atk';
+    return this.httpService.get<ApiResponse>(url);
+  }
 
+  getCardByName(name: string = 'Dark Magician') {
+    const url = this.apiUrl + '?name=' + name;
     return this.httpService.get<ApiResponse>(url);
   }
 }

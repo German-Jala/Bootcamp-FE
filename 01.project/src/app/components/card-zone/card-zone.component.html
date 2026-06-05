@@ -1,14 +1,12 @@
-<div
-    class="card-zone"
-    [ngClass]="[
+<div class="card-zone" [ngClass]="[
         isThereInternalFullWidth() ? 'internal-full-width' : 'no-internal-full-width',
         isThereBorder() ? 'border' : 'no-border'
-    ]"
->
-    <div
-        class="card-space border"
-    >
-        {{ name() }}
+    ]">
+    <div class="card-space border">
+        @if (card()) {
+            <app-card [card]="card()"></app-card>
+        } @else {
+            <div class="card-space-onlytext">{{ name() }}</div>
+        }
     </div>
-    <img src="" alt="">
 </div>

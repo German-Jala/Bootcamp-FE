@@ -1,7 +1,5 @@
 <div class="board">
-    <div class="player-board"
-        [ngStyle]="{ 'background-image': 'url(' + player1Background() + ')' }"
-    >
+    <div class="player-board" [ngStyle]="{ 'background-image': 'url(' + player1Background() + ')' }">
         <div class="deck-zone thin-form-zone">
             <app-card-zone [name]="'deck-zone'">
             </app-card-zone>
@@ -15,7 +13,7 @@
             </app-card-zone>
         </div>
         <div class="banish-zone thin-form-zone">
-            <app-card-zone [name]="'banish-zone'">
+            <app-card-zone [name]="'banish-zone'" [card]="(firstCard$ | async) || undefined">
             </app-card-zone>
         </div>
         <div class="monster-zone">
@@ -35,9 +33,7 @@
             </app-card-zone>
         </div>
     </div>
-    <div class="player-board rotated-board"
-        [ngStyle]="{ 'background-image': 'url(' + player2Background() + ')' }"
-    >
+    <div class="player-board rotated-board" [ngStyle]="{ 'background-image': 'url(' + player2Background() + ')' }">
         <div class="deck-zone thin-form-zone">
             <app-card-zone [name]="'deck-zone'">
             </app-card-zone>
@@ -47,7 +43,7 @@
             </app-card-zone>
         </div>
         <div class="graveyard-zone thin-form-zone">
-            <app-card-zone [name]="'graveyard-zone'">
+            <app-card-zone [name]="'graveyard-zone'" [card]="(secondCard$ | async) || undefined">
             </app-card-zone>
         </div>
         <div class="banish-zone thin-form-zone">
