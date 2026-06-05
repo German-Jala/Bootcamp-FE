@@ -1,14 +1,14 @@
-<div class="card-border">
+<div class="card-container">
     <div class="card-content">
         <div class="header-container">
             <div class="title">
                 <div>
-                    Black Magician
+                    {{ card()?.name || 'None' }}
                 </div>
                 <div class="title__attribute">
                 </div>
             </div>
-            <div class="stars ">
+            <div class="stars">
                 <img class="star" src="/images/red_start.svg" />
                 <img class="star" src="/images/red_start.svg" />
                 <img class="star" src="/images/red_start.svg" />
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="image-container">
-            <div class="image"></div>
+            <img class="image" [src]="card()?.card_images?.[0]?.image_url_cropped || ''" alt="Carta">
         </div>
         <div class="footer-container">
             <div class="footer">
@@ -29,7 +29,9 @@
                     </strong>
                 </div>
                 <div class="effect">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias optio possimus labore voluptate, eius ab magnam quae deserunt sapiente dolorem voluptatum nam eligendi vero similique assumenda cum, placeat perspiciatis sed?
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias optio possimus labore voluptate,
+                    eius ab magnam quae deserunt sapiente dolorem voluptatum nam eligendi vero similique assumenda cum,
+                    placeat perspiciatis sed?
                 </div>
                 <div class="stats">
                     <strong>

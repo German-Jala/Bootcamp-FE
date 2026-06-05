@@ -1,0 +1,7 @@
+<div class="grid">
+    @for (item of cards$ | async; track item.id; let i = $index) {
+    <app-card
+        [card]="item"
+    ></app-card>
+    }
+</div>

@@ -1,7 +1,6 @@
-.card-border {
+.card-container {
     box-sizing: border-box;
     padding: 0.6em;
-    min-height: 100dvh;
     background: rgb(49, 49, 49);
     display: flex;
 }
@@ -12,7 +11,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1em 1em 0.5em 1em; // QUESTION
+    padding: 0.5em 0.5em 0.2em 0.5em; // QUESTION
 }
 
 .header-container {
@@ -48,15 +47,16 @@
 .stars {
     flex: 1;
     margin: 0 var(--card-middle-margin);
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    direction: rtl;
     padding: 0.3em 0em;
     gap: 3px;
 }
 
 .star {
     display: block;
-    max-height: 1.2em;
+    max-height: 0.5em;
 }
 
 .image-container {
@@ -69,7 +69,6 @@
 
 .image {
     flex: 1;
-    background-image: url('/images/BlackMagician.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -90,18 +89,24 @@
     background: rgb(253, 174, 101);
     box-sizing: border-box;
     padding: 0.2em;
+    font-size: 1em;
 }
 
 
 .type {
     flex: 1;
+    font-size: 0.5em;
 }
+
 .effect {
     flex: 5;
+    font-size: 0.5em;
 }
+
 .stats {
     flex: 1;
     text-align: right;
+    font-size: 0.5em;
     border-top: 2px rgb(28, 28, 28) solid;
 }
 
@@ -123,4 +128,34 @@
 
 .magent-border {
     border-color: rgb(186, 11, 148);
+}
+
+.card-container {
+    container-type: inline-size;
+}
+
+@container (min-width: 100px) {
+    .card-container .image-container {
+        flex: 3;
+    }
+
+    .card-container .image {
+        height: 7em;
+    }
+
+    .title {
+        font-size: 0.7em;
+    }
+
+    .type {
+        font-size: 0.4em;
+    }
+
+    .effect {
+        font-size: 0.5em;
+    }
+
+    .stats {
+        font-size: 0.3em;
+    }
 }
