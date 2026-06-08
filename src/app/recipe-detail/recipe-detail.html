@@ -1,17 +1,17 @@
 <div class="recipe-container">
     <div class="recipe-title">
-        {{ recipe().name }}
+        {{ recipe()?.name }}
     </div>
     <div>
         <strong>Image:</strong>
     </div>
     <div>
-        <img [src]="recipe().imgUrl" alt="">
+        <img [src]="recipe()?.imgUrl" alt="">
     </div>
     <div>
         <strong>Description:</strong>
         <span class="recipe-description">
-            {{ recipe().description }}
+            {{ recipe()?.description }}
         </span>
     </div>
     <div>

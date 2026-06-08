@@ -8,14 +8,17 @@
         <p>{{ searchTerm() }}</p>
     </div>
     @for (recipe of filteredRecipes(); track $index; let i = $index) {
-    <button (click)="setRecipe(recipe)">
+    <!-- <button (click)="setRecipe(recipe)">
         @if (recipe.isFavorite) {
         <span>
             ★
         </span>
         }
         {{ recipe.name }}
-    </button>
+    </button> -->
+    <a [routerLink]="['/recipes', recipe.id]">
+        {{ recipe.name }}
+    </a>
     }
-    <app-recipe-detail [recipe]="currentRecipe()"></app-recipe-detail>
+    <!-- <app-recipe-detail [recipe]="currentRecipe()"></app-recipe-detail> -->
 </div>

@@ -1,27 +1,68 @@
 <h2>
-    Phase 4 Module 13: Services & Dependency Injection (DI)
+    Phase 4 Module 15: Basic Routing
 </h2>
 
 <p>
-    <strong>Objective:</strong> Your goal is to centralize recipe data management.
+    <strong>Objective:</strong> our goal is to convert your recipe box into a multi-page app with full URL-based
+    routing.
 </p>
 <p>
     Open the newly generated
 </p>
-<p>
-    <code>src/app/recipe.ts</code> service.
-    Import MOCK_RECIPES and RecipeModel. Inside the Recipe class, declare a signal holding the recipe list, or expose
-    the mock recipes array as a read-only property or method.
-    Open
-    <code>src/app/recipe-list/recipe-list.ts</code>
-    . Import your Recipe service class.
-    Remove the direct import of MOCK_RECIPES from
-    <code>src/app/recipe-list/recipe-list.ts</code>. Inject your Recipe service using the inject() function, and
-    initialize the component's recipes list using the
-    service instead of mock data.
-</p>
-<p>
-    <strong>Expected Outcome:</strong> When you are finished, the app should compile and run exactly as it did before.
-    Decoupling the data source means your component is now a pure "view" layer, receiving its data dynamically from the
-    service!
-</p>
+<ol>
+    <li>
+        <p><strong>Configure Routes:</strong></p>
+        Open <code>src/app/app.routes.ts</code> and add paths for:
+        <ul>
+            <li>/recipes mapping to RecipeList.</li>
+            <li>/recipes/:id mapping to RecipeDetail.</li>
+            <li>An empty path '' redirecting to /recipes with pathMatch: 'full'.</li>
+        </ul>
+    </li>
+    <li>
+        <p><strong>Update Root Component:</strong></p>
+        In <code>src/app/app.ts</code>, import RouterOutlet from '@angular/router' and add it to imports.
+        In <code>src/app/app.html</code>, replace the {{'<' + 'app-recipe-list>' }} tag with {{ '<' + 'router-outlet>'
+            + '<' + '/router-outlet>' }}. (Keep {{'<' + 'app-instruction>' }} at the top). </li>
+    <li>
+        <p><strong>Refactor RecipeList:</strong></p>
+        <ul>
+            <li>
+                In <code>src/app/recipe-list/recipe-list.ts</code>, import RouterLink and add it to the imports array.
+                Remove the
+                RecipeDetail child component from the imports since it is now loaded via routing.
+            </li>
+            <li>
+                In <code>src/app/recipe-list/recipe-list.html</code>, remove the {{'<' + 'app-recipe-detail><'
+                    + '/app-recipe-detail>' }} element. Replace the buttons with links or style the button wrappers to
+                    use [routerLink]="['/recipes', recipe.id]" to trigger route changes on click. </li>
+        </ul>
+    </li>
+    <li>
+        <p><strong>Refactor RecipeDetail:</strong></p>
+        <p>
+            In <code>src/app/recipe-detail/recipe-detail.ts</code>, remove the signal input() for the recipe.
+        </p>
+        <p>
+            Inject both the ActivatedRoute and the Recipe data service.
+        </p>
+        <p>
+            Define a local recipe signal (e.g., protected readonly recipe = signal{{'<' + 'RecipeModel | null>'
+                }}(null); or handle it gracefully). </p>
+                <p>
+                    Implement OnInit and read the id param from the route snapshot. Query the Recipe service's recipes
+                    list to find the recipe whose id matches (convert the parameter string to a number using Number(id))
+                    and set your local recipe signal.
+                </p>
+    </li>
+</ol>
+<div>
+    <p>
+        <strong>Expected Outcome:</strong>
+    </p>
+    <p>
+        When you navigate to http://localhost:4200/recipes, you should see your recipe list. Clicking "Spaghetti
+        Carbonara" should change the browser's address bar to http://localhost:4200/recipes/1 and render the details for
+        Spaghetti Carbonara. Using the browser's back button should return you to the full list.
+    </p>
+</div>
