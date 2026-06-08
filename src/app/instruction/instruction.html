@@ -1,20 +1,27 @@
 <h2>
-    Phase 3 Module 12: Conditional Rendering with {{ "@if" }}
+    Phase 4 Module 13: Two-Way Binding
 </h2>
 
 <p>
-    <strong>Objective:</strong> Your goal is to highlight favorite recipes. Open the
-    <code>src/app/recipe-list/recipe-list.html</code>
-    template and use Angular's {{ "@if" }} control flow block inside the recipe buttons (or list item tags) to
-    conditionally
-    render a visual indicator (like a star emoji '★' or 'Favorite' badge) next to the name of any recipe that has
-    isFavorite: true.
+    <strong>Objective:</strong> Your goal is to build a search filter for your recipe box.
 </p>
 <p>
-    <strong>Expected Outcome:</strong> When you are finished, you should see a star indicator '★' next to the name
-    "Spaghetti Carbonara"
-    on its button in the sidebar, while "Caprese Salad" should have no indicator.
-
-    Give it a shot! Update your models, mock data, and template, and let me know when you're ready for me to check your
-    work!
+    <code>src/app/recipe-list/recipe-list.ts</code>
+    import FormsModule and add it to your component imports.
+    Define a new writable signal searchTerm of type string, initialized to an empty string ''.
+    Create a computed signal called filteredRecipes that dynamically returns a filtered array of your recipes list based
+    on
+    whether the recipe name includes the searchTerm value (case-insensitive).
+</p>
+<p>
+    Update the template in <code>src/app/recipe-list/recipe-list.html</code>
+    to add an input text field at the top of the sidebar. Bind this input to your searchTerm signal using two-way
+    binding.
+    Update your template buttons to loop over the new filteredRecipes() computed signal instead of the static recipes()
+    list.
+</p>
+<p>
+    <strong>Expected Outcome:</strong> When you are finished, typing in the search input box should instantly filter the
+    recipe list in the sidebar. For example, typing "Carbonara" should hide "Caprese Salad" and only show the Spaghetti
+    option. Clearing the text box should immediately display all recipes again.
 </p>

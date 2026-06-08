@@ -4,22 +4,18 @@
 <hr>
 <div>
     <div>
-        <button (click)="setRecipe(recipes()[0])">
-            @if (recipes()[0].isFavorite) {
-            <span>
-                ★
-            </span>
-            }
-            Spaghetti Carbonara
-        </button>
-        <button (click)="setRecipe(recipes()[1])">
-            @if (recipes()[1].isFavorite) {
-            <span>
-                ★
-            </span>
-            }
-            Caprese Salad
-        </button>
+        <input type="text" [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)">
+        <p>{{ searchTerm() }}</p>
     </div>
+    @for (recipe of filteredRecipes(); track $index; let i = $index) {
+    <button (click)="setRecipe(recipe)">
+        @if (recipe.isFavorite) {
+        <span>
+            ★
+        </span>
+        }
+        {{ recipe.name }}
+    </button>
+    }
     <app-recipe-detail [recipe]="currentRecipe()"></app-recipe-detail>
 </div>
