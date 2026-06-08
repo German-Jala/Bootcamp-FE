@@ -4,6 +4,9 @@
 <hr>
 <div>
     <div>
+        <a [routerLink]="['/add-recipe']">Add Recipe</a>
+    </div>
+    <div>
         <input type="text" [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)">
         <p>{{ searchTerm() }}</p>
     </div>

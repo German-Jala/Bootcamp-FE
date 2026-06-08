@@ -4,10 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 import { Recipe } from '../recipe';
 import { RecipeModel } from '../models';
 import { ToFormControls } from '../helpers/ToFormControls';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-add-recipe',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, MatButtonModule],
   templateUrl: './add-recipe.html',
   styleUrl: './add-recipe.css',
 })
@@ -32,7 +33,6 @@ export class AddRecipe {
       this.router.navigate(['']);
     }
   }
-
 
 
 }

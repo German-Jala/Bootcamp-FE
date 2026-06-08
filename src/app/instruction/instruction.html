@@ -1,47 +1,32 @@
 <h2>
-    Phase 4 Module 16: Adding New Recipes
+    Phase 4 Module 17: Intro to Angular Material
 </h2>
 
 <p>
-    <strong>Objective:</strong> Your goal is to build an AddRecipe component that allows users to add new recipes to the
-    application.
+    <strong>Note:</strong> During the prompt, choose any pre-built theme you like (or accept the default) and select yes
+    to set up global typography. The CLI will automatically update your <code>package.json</code> and styling sheets.
+</p>
+
+<p>
+    <strong>Objective:</strong> Your goal is to replace a standard HTML button in your application with a styled Angular
+    Material button.
 </p>
 
 <ol>
     <li>
-        <p><strong>Refactor the Service:</strong></p>
-        Open <code>src/app/recipe.ts</code>. Change the <code>recipes</code> property to a writable signal containing
-        <code>MOCK_RECIPES</code>. Implement an
-        <code>addRecipe(newRecipe: Omit{{ '<' + 'RecipeModel, \'id\'>' }})</code> method that generates a unique
-        <code>id</code> (e.g., matching the array length + 1), constructs a new <code>RecipeModel</code> object, and
-        updates the recipes signal by appending the new recipe.
+        <p><strong>Select a Button:</strong></p>
+        Choose a component (e.g., the submit button in <code>src/app/add-recipe/add-recipe.html</code> or the servings
+        adjustment buttons in <code>src/app/recipe-detail/recipe-detail.html</code>).
     </li>
     <li>
-        <p><strong>Expose Service Signal:</strong></p>
-        In <code>src/app/recipe-list/recipe-list.ts</code>, update the <code>recipes</code> signal to read from the
-        service signal directly: <code>recipes = this.recipeService.recipes;</code> (so it automatically updates).
+        <p><strong>Import Material Module:</strong></p>
+        Import <code>MatButtonModule</code> from <code>'@angular/material/button'</code> in that component's
+        <code>.ts</code> file and add it to the <code>imports</code> array.
     </li>
     <li>
-        <p><strong>Build the Form:</strong></p>
-        In <code>AddRecipe</code>, inject <code>FormBuilder</code> and <code>Recipe</code> (the service). Build a form
-        group containing controls for <code>name</code>, <code>description</code>, <code>imgUrl</code>, and
-        <code>isFavorite</code>. Add validators to ensure <code>name</code> and <code>description</code> are required.
-    </li>
-    <li>
-        <p><strong>Wire Form Template:</strong></p>
-        In <code>add-recipe.html</code>, create a form layout with input fields for each form control, binding them
-        using <code>formControlName</code>. Add a submit button.
-    </li>
-    <li>
-        <p><strong>Handle Submit:</strong></p>
-        In the submit handler, call your service's <code>addRecipe()</code> method passing the form values, then
-        navigate back to <code>/recipes</code> (hint: inject the Angular <code>Router</code> service and call
-        <code>this.router.navigate(['/recipes'])</code>).
-    </li>
-    <li>
-        <p><strong>Add Route:</strong></p>
-        Register <code>add-recipe</code> as a path mapping to <code>AddRecipe</code> inside
-        <code>src/app/app.routes.ts</code>.
+        <p><strong>Update the Template:</strong></p>
+        Update the button template to use a Material directive, such as <code>mat-raised-button</code> or
+        <code>mat-flat-button</code>.
     </li>
 </ol>
 
@@ -50,8 +35,7 @@
         <strong>Expected Outcome:</strong>
     </p>
     <p>
-        When you navigate to http://localhost:4200/add-recipe, you should see your input form. Filling out the form and
-        clicking submit should add the new recipe to your service's state, and redirect you back to /recipes where the
-        new recipe should immediately appear in the sidebar list.
+        When you compile the app, the buttons you updated will render with modern Material Design typography, animations
+        (ripple effects), and professional visual styling instead of standard browser-default button boxes.
     </p>
 </div>
