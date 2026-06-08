@@ -1,0 +1,28 @@
+<h2>
+    Add a new recipe
+</h2>
+
+<form [formGroup]="recipeForm" (ngSubmit)="addRecipe()">
+    <div>
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text">
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <input id="description" formControlName="description" type="text">
+    </div>
+
+    <div>
+        <label for="imgUrl">Image URL</label>
+        <input id="imgUrl" formControlName="imgUrl" type="text">
+    </div>
+
+    <div>
+        <label for="isFavorite">Is Favorite</label>
+        <input id="isFavorite" formControlName="isFavorite" type="checkbox">
+    </div>
+    <button type="submit">Add Recipe</button>
+</form>
+
+<a [routerLink]="['/']">Back</a>

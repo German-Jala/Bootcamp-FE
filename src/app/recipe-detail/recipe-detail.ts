@@ -33,7 +33,7 @@ export class RecipeDetail implements OnInit {
   ngOnInit(): void {
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {
-      const foundRecipe = this.recipeService.recipes.find(recipe => recipe.id == id) || null;
+      const foundRecipe = this.recipeService.recipes().find(recipe => recipe.id == id) || null;
       this.recipe.set(foundRecipe);
     }
   }

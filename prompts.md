@@ -1,24 +1,38 @@
-#Why Routes are not working?
-import { Routes } from '@angular/router';
+##Is there a form to use something like
+```
+  protected readonly recipeForm = this.formBuilder.group<Omit<RecipeModel, 'id'>>({
 
-export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: '/recipes',
-        pathMatch: 'full',
-    },
-    {
-        path: '/recipes',
-        pathMatch: 'full',
-        loadComponent: () => import('./recipe-list/recipe-list').then((m) => m.RecipeList),
-    },
-    {
-        path: '/recipes/:id',
-        pathMatch: 'full',
-        loadComponent: () => import('./recipe-detail/recipe-detail').then((m) => m.RecipeDetail),
-    }
-];
+    name: ['', Validators.required],
+
+    description: ['', Validators.required],
+
+    imgUrl: ['', Validators.required],
+
+    isFavorite: [false, Validators.required],
+
+  }); 
+```
 
 Answer
-It was a problem with / sign
+Yes, a helper called ToFormControl
 
+## Get values and pass throught parameter
+
+```
+
+  protected readonly recipeForm = this.formBuilder.group<ToFormControls<Omit<RecipeModel, 'id' | 'ingredients'>>>({
+    name: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+    description: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+    imgUrl: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+    isFavorite: new FormControl(false, { validators: [Validators.required], nonNullable: true }),
+  });
+
+  protected addRecipe() {
+    if (this.recipeForm.valid) {
+      this.recipeForm.value;
+      console.log(this.recipeForm.value)
+      this.recipeForm.reset;
+    }
+    this.recipeService.addRecipe({...this.recipeForm.getRawValue(), ingredients: []});
+```
+Answer, getRawValue gives us the value of the form without hidden properties.

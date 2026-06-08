@@ -1,68 +1,57 @@
 <h2>
-    Phase 4 Module 15: Basic Routing
+    Phase 4 Module 16: Adding New Recipes
 </h2>
 
 <p>
-    <strong>Objective:</strong> our goal is to convert your recipe box into a multi-page app with full URL-based
-    routing.
+    <strong>Objective:</strong> Your goal is to build an AddRecipe component that allows users to add new recipes to the
+    application.
 </p>
-<p>
-    Open the newly generated
-</p>
+
 <ol>
     <li>
-        <p><strong>Configure Routes:</strong></p>
-        Open <code>src/app/app.routes.ts</code> and add paths for:
-        <ul>
-            <li>/recipes mapping to RecipeList.</li>
-            <li>/recipes/:id mapping to RecipeDetail.</li>
-            <li>An empty path '' redirecting to /recipes with pathMatch: 'full'.</li>
-        </ul>
+        <p><strong>Refactor the Service:</strong></p>
+        Open <code>src/app/recipe.ts</code>. Change the <code>recipes</code> property to a writable signal containing
+        <code>MOCK_RECIPES</code>. Implement an
+        <code>addRecipe(newRecipe: Omit{{ '<' + 'RecipeModel, \'id\'>' }})</code> method that generates a unique
+        <code>id</code> (e.g., matching the array length + 1), constructs a new <code>RecipeModel</code> object, and
+        updates the recipes signal by appending the new recipe.
     </li>
     <li>
-        <p><strong>Update Root Component:</strong></p>
-        In <code>src/app/app.ts</code>, import RouterOutlet from '@angular/router' and add it to imports.
-        In <code>src/app/app.html</code>, replace the {{'<' + 'app-recipe-list>' }} tag with {{ '<' + 'router-outlet>'
-            + '<' + '/router-outlet>' }}. (Keep {{'<' + 'app-instruction>' }} at the top). </li>
-    <li>
-        <p><strong>Refactor RecipeList:</strong></p>
-        <ul>
-            <li>
-                In <code>src/app/recipe-list/recipe-list.ts</code>, import RouterLink and add it to the imports array.
-                Remove the
-                RecipeDetail child component from the imports since it is now loaded via routing.
-            </li>
-            <li>
-                In <code>src/app/recipe-list/recipe-list.html</code>, remove the {{'<' + 'app-recipe-detail><'
-                    + '/app-recipe-detail>' }} element. Replace the buttons with links or style the button wrappers to
-                    use [routerLink]="['/recipes', recipe.id]" to trigger route changes on click. </li>
-        </ul>
+        <p><strong>Expose Service Signal:</strong></p>
+        In <code>src/app/recipe-list/recipe-list.ts</code>, update the <code>recipes</code> signal to read from the
+        service signal directly: <code>recipes = this.recipeService.recipes;</code> (so it automatically updates).
     </li>
     <li>
-        <p><strong>Refactor RecipeDetail:</strong></p>
-        <p>
-            In <code>src/app/recipe-detail/recipe-detail.ts</code>, remove the signal input() for the recipe.
-        </p>
-        <p>
-            Inject both the ActivatedRoute and the Recipe data service.
-        </p>
-        <p>
-            Define a local recipe signal (e.g., protected readonly recipe = signal{{'<' + 'RecipeModel | null>'
-                }}(null); or handle it gracefully). </p>
-                <p>
-                    Implement OnInit and read the id param from the route snapshot. Query the Recipe service's recipes
-                    list to find the recipe whose id matches (convert the parameter string to a number using Number(id))
-                    and set your local recipe signal.
-                </p>
+        <p><strong>Build the Form:</strong></p>
+        In <code>AddRecipe</code>, inject <code>FormBuilder</code> and <code>Recipe</code> (the service). Build a form
+        group containing controls for <code>name</code>, <code>description</code>, <code>imgUrl</code>, and
+        <code>isFavorite</code>. Add validators to ensure <code>name</code> and <code>description</code> are required.
+    </li>
+    <li>
+        <p><strong>Wire Form Template:</strong></p>
+        In <code>add-recipe.html</code>, create a form layout with input fields for each form control, binding them
+        using <code>formControlName</code>. Add a submit button.
+    </li>
+    <li>
+        <p><strong>Handle Submit:</strong></p>
+        In the submit handler, call your service's <code>addRecipe()</code> method passing the form values, then
+        navigate back to <code>/recipes</code> (hint: inject the Angular <code>Router</code> service and call
+        <code>this.router.navigate(['/recipes'])</code>).
+    </li>
+    <li>
+        <p><strong>Add Route:</strong></p>
+        Register <code>add-recipe</code> as a path mapping to <code>AddRecipe</code> inside
+        <code>src/app/app.routes.ts</code>.
     </li>
 </ol>
+
 <div>
     <p>
         <strong>Expected Outcome:</strong>
     </p>
     <p>
-        When you navigate to http://localhost:4200/recipes, you should see your recipe list. Clicking "Spaghetti
-        Carbonara" should change the browser's address bar to http://localhost:4200/recipes/1 and render the details for
-        Spaghetti Carbonara. Using the browser's back button should return you to the full list.
+        When you navigate to http://localhost:4200/add-recipe, you should see your input form. Filling out the form and
+        clicking submit should add the new recipe to your service's state, and redirect you back to /recipes where the
+        new recipe should immediately appear in the sidebar list.
     </p>
 </div>

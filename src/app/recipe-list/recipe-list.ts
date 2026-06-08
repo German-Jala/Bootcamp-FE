@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 export class RecipeList {
   private readonly recipeService = inject(Recipe);
 
-  protected readonly recipes = signal<RecipeModel[]>(this.recipeService.recipes);
+  protected readonly recipes = this.recipeService.recipes;
   protected readonly currentRecipe = signal<RecipeModel>(this.recipes()[0]);
   protected readonly searchTerm = signal<string>('');
   protected readonly filteredRecipes = computed(() => {
