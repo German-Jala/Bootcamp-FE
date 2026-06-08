@@ -1,27 +1,27 @@
 <h2>
-    Phase 4 Module 13: Two-Way Binding
+    Phase 4 Module 13: Services & Dependency Injection (DI)
 </h2>
 
 <p>
-    <strong>Objective:</strong> Your goal is to build a search filter for your recipe box.
+    <strong>Objective:</strong> Your goal is to centralize recipe data management.
 </p>
 <p>
+    Open the newly generated
+</p>
+<p>
+    <code>src/app/recipe.ts</code> service.
+    Import MOCK_RECIPES and RecipeModel. Inside the Recipe class, declare a signal holding the recipe list, or expose
+    the mock recipes array as a read-only property or method.
+    Open
     <code>src/app/recipe-list/recipe-list.ts</code>
-    import FormsModule and add it to your component imports.
-    Define a new writable signal searchTerm of type string, initialized to an empty string ''.
-    Create a computed signal called filteredRecipes that dynamically returns a filtered array of your recipes list based
-    on
-    whether the recipe name includes the searchTerm value (case-insensitive).
+    . Import your Recipe service class.
+    Remove the direct import of MOCK_RECIPES from
+    <code>src/app/recipe-list/recipe-list.ts</code>. Inject your Recipe service using the inject() function, and
+    initialize the component's recipes list using the
+    service instead of mock data.
 </p>
 <p>
-    Update the template in <code>src/app/recipe-list/recipe-list.html</code>
-    to add an input text field at the top of the sidebar. Bind this input to your searchTerm signal using two-way
-    binding.
-    Update your template buttons to loop over the new filteredRecipes() computed signal instead of the static recipes()
-    list.
-</p>
-<p>
-    <strong>Expected Outcome:</strong> When you are finished, typing in the search input box should instantly filter the
-    recipe list in the sidebar. For example, typing "Carbonara" should hide "Caprese Salad" and only show the Spaghetti
-    option. Clearing the text box should immediately display all recipes again.
+    <strong>Expected Outcome:</strong> When you are finished, the app should compile and run exactly as it did before.
+    Decoupling the data source means your component is now a pure "view" layer, receiving its data dynamically from the
+    service!
 </p>
