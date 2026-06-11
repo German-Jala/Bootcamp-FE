@@ -1,25 +1,30 @@
-<h2>
-    Mercado
-</h2>
+<div class="page">
+    <h2>
+        Mercado
+    </h2>
 
-<div class="product-grid">
-    @for (product of products(); track product.id) {
-    <div class="card">
-        <div class="card-container">
-            <img class="img" [src]="product.image" />
-        </div>
-        <div class="card-body-container">
-            <div>
-                <strong>{{ product.title }}</strong>
+    <div class="product-grid">
+        @for (product of products(); track product.id) {
+        <div class="card">
+            <div class="card-container">
+                <img class="img" [src]="product.image" />
             </div>
-            <!-- <div>
-                {{ product.description | slice: 0 : 35 }}
-            </div> -->
-            <div>
-                {{ product.description | truncate: 35 }}
+            <div class="card-body-container">
+                <div>
+                    <strong>{{ product.title }}</strong>
+                </div>
+                <!-- <div>
+                    {{ product.description | slice: 0 : 35 }}
+                </div> -->
+                <div>
+                    {{ product.description | slice: 0 : 35 | truncate: 30 }}
+                </div>
+                <div>
+                    Quantity: {{ product.elements | quantity }}
+                </div>
             </div>
         </div>
+        }
+
     </div>
-    }
-
 </div>
