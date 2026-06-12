@@ -1,17 +1,29 @@
 import { Component, input } from '@angular/core';
 import { Product } from '../../../models/product';
-import { TruncatePipe } from "../../../pipes/truncate-pipe";
+import { ProductCard } from '../../../models/productCard';
 
 @Component({
   selector: 'app-card',
-  imports: [TruncatePipe],
+  imports: [],
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
 export class Card {
-  product = input.required<Product>({ alias: 'setProduct' });
+  product = input.required<ProductCard, Product>({
+    alias: 'setProduct',
+    transform: this.productTransformToCard,
+  });
 
-  productTransform = (product: Product) => {
-    return product;
+  productTransformToCard(
+    { description, id, image, price, title }: Product
+  ): ProductCard {
+    return {
+      explanation: description,
+      id,
+      image,
+      name: title,
+      price: price,
+    };
   }
+
 }

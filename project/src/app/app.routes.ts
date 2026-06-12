@@ -16,5 +16,14 @@ export const routes: Routes = [
         pathMatch: 'full',
         loadComponent: () => import('./pages/pipes/pipes').then(c => c.Pipes),
     },
-
+    {
+        path: 'cards',
+        pathMatch: 'full',
+        loadComponent: () => import('./pages/cards/cards').then(c => c.Cards),
+    },
+    {
+        path: 'inputs',
+        pathMatch: 'full',
+        loadComponent: () => import('./pages/inputs/inputs').then(c => c.Inputs),
+    },
 ];
