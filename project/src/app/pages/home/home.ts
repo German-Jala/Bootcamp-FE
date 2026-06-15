@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +8,6 @@ import { RouterLink } from "@angular/router";
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {}
+export class Home {
+  routeLinks = signal(routes);
+}

@@ -1,6 +1,10 @@
 <h1>
     Index
 </h1>
-<a [routerLink]="['/pipes']">
-    Pipes
-</a>
+<ul>
+    @for (link of routeLinks(); track link.path) {
+    <li [routerLink]="[`/${link.path}`]">
+        {{ link.path }}
+    </li>
+    }
+</ul>

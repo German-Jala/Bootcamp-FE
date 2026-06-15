@@ -4,3 +4,27 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+
+.widget-container {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.btn-enviar {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+.mi-panel-personalizado {
+    background-color: #f1c40f !important;
+}
+
+.grid-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
