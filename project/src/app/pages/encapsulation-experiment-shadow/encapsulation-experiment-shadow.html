@@ -1,1 +1,34 @@
-<p>encapsulation-experiment-shadow works!</p>
+<div class="grid-panel">
+    <div class="contenedor-selector">
+        <mat-form-field>
+            <mat-label>Selecciona una opción</mat-label>
+            <mat-select panelClass="mi-panel-personalizado">
+                <mat-option value="1">Opción A</mat-option>
+                <mat-option value="2">Opción B</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="contenedor-selector">
+        <mat-form-field>
+            <mat-label>Selecciona una opción</mat-label>
+            <mat-select panelClass="mi-panel-personalizado">
+                <mat-option value="1">Opción A</mat-option>
+                <mat-option value="2">Opción B</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <app-encapsulation-shadow></app-encapsulation-shadow>
+    <div class="contenedor-selector">
+        <mat-form-field>
+            <mat-label>Selecciona una opción</mat-label>
+            <mat-select panelClass="mi-panel-personalizado">
+                <mat-option value="1">Opción A</mat-option>
+                <mat-option value="2">Opción B</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div>
+    It's not affected by styles, it's affected by its own configuration, it doesn't affect neighboor components
+</div>

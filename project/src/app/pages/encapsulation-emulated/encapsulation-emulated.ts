@@ -19,9 +19,9 @@ import { MatOption, MatSelect } from '@angular/material/select';
   `,
   styles: [`
     .mi-panel-personalizado {
-        background-color: #b9180c !important;
+        background-color: #d82e22 !important;
     }
   `],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.Emulated, // It's not necessary, it default option
 })
 export class EncapsulationEmulated { }

@@ -3,6 +3,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 
 @Component({
+  selector: 'app-encapsulation-shadow',
   imports: [MatLabel, MatSelect, MatOption, MatFormField],
   template: `
     <h1>Encapsulation - Shadow</h1>
