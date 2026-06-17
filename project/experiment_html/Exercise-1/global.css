@@ -1,0 +1,30 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 20px;
+    background: gainsboro;
+}
+
+.grid-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.card {
+    border: 3px solid gray;
+    background: wheat;
+}
+.title {
+    padding: 11px;
+    font-size: 1.3em;
+    color: red;
+}
+.text {
+    padding: 11px;
+    color: green;
+}
+
+/* ::part(my-title) {
+    color: #cf4a3c;
+    text-transform: uppercase;
+    border-bottom: 2px dashed #333;
+} */
