@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(212, 255, 255);
+}
+
+.panel {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(4, 1fr);
+}
