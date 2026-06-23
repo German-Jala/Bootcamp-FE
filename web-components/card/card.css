@@ -32,8 +32,35 @@
 }
 
 .footer {
-    background: rgb(214, 20, 20);
     color: rgb(228, 228, 228);
     padding: 0.7em 1em;
     font-size: 1.2em;
+}
+
+.bg-red {
+    background: rgb(214, 20, 20);
+}
+.bg-yellow {
+    background: rgb(214, 211, 20);
+}
+.bg-blue {
+    background: rgb(72, 20, 214);
+}
+.bg-green {
+    background: rgb(15, 148, 21);
+}
+.bg-black {
+    background: rgb(22, 22, 22);
+    color: rgb(228, 228, 228);
+}
+
+.button-container {
+    padding: 0.5em 0em;
+}
+
+.button {
+    padding: 0.3em;
+    border: 1px solid rgb(24, 24, 24);
+    background: rgb(48, 48, 48);
+    color: rgb(238, 238, 238);
 }

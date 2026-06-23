@@ -13,11 +13,17 @@
         My Web Component
     </h1>
     <div class="panel">
-        <my-card enterpriseName="Jalasoft" employeeName="German Alvarez" roleName="Developer"></my-card>
-        <my-card enterpriseName="Digital" employeeName="Pedro Sanchez" roleName="Senior Developer"></my-card>
-        <my-card enterpriseName="Azure" employeeName="Hugo Marquez" roleName="QA"></my-card>
-        <my-card enterpriseName="My Opera" employeeName="Lucas Perez" roleName="Tester"></my-card>
+        <my-card id="jalasoft" enterpriseName="Jalasoft" employeeName="German Alvarez" roleName="Developer" bg-color="bg-red"></my-card>
+        <my-card enterpriseName="Digital" employeeName="Pedro Sanchez" roleName="Senior Developer" bg-color="bg-yellow"></my-card>
+        <my-card enterpriseName="Azure" employeeName="Hugo Marquez" roleName="QA" bg-color="bg-blue"></my-card>
+        <my-card enterpriseName="My Opera" employeeName="Lucas Perez" roleName="Tester" bg-color="bg-green"></my-card>
     </div>
+    <div>
+        <button id="outside-button">
+            Outside Button
+        </button>
+    </div>
+    <script type="module" src="./index.js"></script>
     <script type="module" src="./web-components/card/card.js"></script>
 </body>
 
