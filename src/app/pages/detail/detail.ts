@@ -1,7 +1,6 @@
-import { Component, input, inject, signal, effect } from '@angular/core';
+import { Component, input, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardService } from '../../services/card.service';
-import { Card } from '../../models/card.model';
 import { SpinnerComponent } from '../../shared/atoms/spinner/spinner';
 import { BadgeComponent } from '../../shared/atoms/badge/badge';
 import { TabsComponent, TabItem } from '../../shared/molecules/tabs/tabs';
