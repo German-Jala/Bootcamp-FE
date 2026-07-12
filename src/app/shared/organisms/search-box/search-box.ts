@@ -5,7 +5,6 @@ import { SpinnerComponent } from '../../atoms/spinner/spinner';
 
 @Component({
   selector: 'app-search-box',
-  standalone: true,
   imports: [SpinnerComponent],
   templateUrl: './search-box.html',
   styleUrl: './search-box.css',

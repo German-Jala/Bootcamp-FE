@@ -9,7 +9,6 @@ import { StatsGridComponent } from '../../shared/organisms/stats-grid/stats-grid
 
 @Component({
   selector: 'app-detail-page',
-  standalone: true,
   imports: [SpinnerComponent, BadgeComponent, TabsComponent, StatsGridComponent],
   templateUrl: './detail.html',
   styleUrl: './detail.css',

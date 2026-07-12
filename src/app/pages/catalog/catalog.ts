@@ -9,7 +9,6 @@ import { Button } from "../../shared/atoms/button/button";
 
 @Component({
   selector: 'app-catalog-page',
-  standalone: true,
   imports: [SearchBoxComponent, CardPreviewComponent, SkeletonCard, ErrorView, EmptyResultsView, Button],
   templateUrl: './catalog.html',
   styleUrl: './catalog.css',

@@ -16,7 +16,7 @@
   <app-error-view [errorMessage]="cardService.error() || 'Error desconocido'" (onRetry)="cardService.loadCards()" />
   } @else if (cardService.cards().length === 0) {
   <!-- Empty results view -->
-  <app-empty-results-view [title]="'No se encontraron cartas'" [description]="emptyResultsDescription()" />
+  <app-empty-results-view [title]="'No se encontraron cartas'" [description]="cardService.error() || 'xsxs'" />
   } @else {
   <!-- Grid elements -->
   <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-8 py-4">

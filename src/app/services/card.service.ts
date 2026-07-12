@@ -71,6 +71,7 @@ export class CardService {
         },
         error: (err) => {
           if (err.status === 400 || (err.error && err.error.error === 'No card matching your query was found in the database.')) {
+            this.error.set(`No pudimos encontrar cartas que coincidan con "${this.searchTerm()}". Intenta con otro término de búsqueda.`);
             this.cards.set([]);
           } else {
             this.error.set('Ocurrió un error al obtener las cartas. Inténtalo de nuevo.');
