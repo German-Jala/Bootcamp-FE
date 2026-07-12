@@ -1,0 +1,21 @@
+<div class="border-b border-white/10 mb-6 w-full">
+  <div class="flex gap-6 overflow-x-auto" style="scrollbar-width: none;" role="tablist">
+    @for (tab of tabs(); track tab.id) {
+      <button
+        type="button"
+        class="bg-transparent border-none py-3 px-1 cursor-pointer relative transition-all duration-300 outline-none whitespace-nowrap"
+        [class]="activeTabId() === tab.id ? 'text-yellow-400 font-semibold' : 'text-white/60 hover:text-white/95'"
+        (click)="selectTab(tab.id)"
+        role="tab"
+        [attr.aria-selected]="activeTabId() === tab.id"
+        [attr.aria-controls]="'tab-panel-' + tab.id"
+        [id]="'tab-' + tab.id"
+      >
+        {{ tab.label }}
+        @if (activeTabId() === tab.id) {
+          <span class="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-yellow-400 to-orange-500 rounded-t-sm shadow-[0_0_8px_rgba(255,170,0,0.6)]"></span>
+        }
+      </button>
+    }
+  </div>
+</div>

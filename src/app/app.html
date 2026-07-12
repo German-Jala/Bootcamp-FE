@@ -9,49 +9,9 @@
 </header>
 
 <main class="main-content">
-  <!-- Search container (only visible if we are NOT in detail view) -->
-  @if (!cardService.selectedCard()) {
-    <div class="search-section">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input
-          #searchInput
-          type="text"
-          placeholder="Escribe el nombre de una carta (ej: Dragon, Magician)..."
-          class="search-input"
-          [value]="cardService.searchTerm()"
-          (input)="onSearchInput($event)"
-          aria-label="Buscar cartas"
-          autofocus
-        />
-        @if (cardService.searchTerm()) {
-          <button class="clear-btn" (click)="clearSearch()" aria-label="Limpiar búsqueda">
-            ✕
-          </button>
-        }
-      </div>
-
-      <!-- Small loading indicator in search section -->
-      @if (cardService.loading()) {
-        <div class="search-loading">
-          <div class="spinner"></div>
-          <span>Buscando en la base de datos...</span>
-        </div>
-      } @else if (cardService.searchTerm()) {
-        <div class="search-results-info">
-          Resultados para "<span class="term">{{ cardService.searchTerm() }}</span>"
-        </div>
-      }
-    </div>
-
-    <!-- Cards Catalog Grid -->
-    <app-card-grid />
-  } @else {
-    <!-- Card Detail View -->
-    <app-card-detail />
-  }
+  <router-outlet />
 </main>
 
 <footer class="app-footer">
-  <p>© 2026 Duelist Codex. Creado para el Bootcamp FE - Semana 1.</p>
+  <p>© 2026 Duelist Codex. Creado por German.</p>
 </footer>

@@ -1,47 +1,7 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
-
-export interface CardImage {
-  id: number;
-  image_url: string;
-  image_url_small: string;
-  image_url_cropped: string;
-}
-
-export interface CardPrice {
-  cardmarket_price: string;
-  tcgplayer_price: string;
-  ebay_price: string;
-  amazon_price: string;
-  coolstuffinc_price: string;
-}
-
-export interface Card {
-  id: number;
-  name: string;
-  type: string;
-  frameType?: string;
-  desc: string;
-  atk?: number;
-  def?: number;
-  level?: number;
-  race?: string;
-  attribute?: string;
-  archetype?: string;
-  card_images: CardImage[];
-  card_prices: CardPrice[];
-}
-
-export interface ApiResponse {
-  data: Card[];
-  meta?: {
-    current_rows: number;
-    total_rows?: number;
-    next_page?: string;
-    next_page_offset?: number;
-  };
-}
+import { finalize, map, Observable, of } from 'rxjs';
+import { Card, ApiResponse } from '../models/card.model';
 
 @Injectable({
   providedIn: 'root',
@@ -57,34 +17,19 @@ export class CardService {
   readonly searchTerm = signal<string>('');
   readonly offset = signal<number>(0);
   readonly limit = signal<number>(20);
-  readonly selectedCard = signal<Card | null>(null);
 
-  // Pagination state computed properties
-  readonly hasNextPage = computed(() => {
-    // If we loaded less cards than the limit, we reached the end of results
-    return this.cards().length === this.limit();
-  });
-
-  readonly hasPrevPage = computed(() => {
-    return this.offset() > 0;
-  });
-
-  readonly currentPage = computed(() => {
-    return Math.floor(this.offset() / this.limit()) + 1;
-  });
+  // Pagination computed properties
+  readonly hasNextPage = computed(() => this.cards().length === this.limit());
+  readonly hasPrevPage = computed(() => this.offset() > 0);
+  readonly currentPage = computed(() => Math.floor(this.offset() / this.limit()) + 1);
 
   constructor() {
-    // Load initial cards
     this.loadCards();
-  }
-
-  selectCard(card: Card | null): void {
-    this.selectedCard.set(card);
   }
 
   search(term: string): void {
     this.searchTerm.set(term);
-    this.offset.set(0); // Reset page on new search
+    this.offset.set(0);
     this.loadCards();
   }
 
@@ -118,16 +63,13 @@ export class CardService {
     this.http
       .get<ApiResponse>(this.apiUrl, { params })
       .pipe(
-        finalize(() => {
-          this.loading.set(false);
-        })
+        finalize(() => this.loading.set(false))
       )
       .subscribe({
         next: (response) => {
           this.cards.set(response.data || []);
         },
         error: (err) => {
-          // YGOPRODeck API returns 400 when no cards match the filter/search term
           if (err.status === 400 || (err.error && err.error.error === 'No card matching your query was found in the database.')) {
             this.cards.set([]);
           } else {
@@ -136,5 +78,24 @@ export class CardService {
           }
         },
       });
+  }
+
+  /**
+   * Fetches a card by its ID from the API.
+   * Can look at local cache (cards signal) first to avoid API call,
+   * or perform HTTP request if not present.
+   */
+  getCardById(id: string): Observable<Card | null> {
+    // Check if the card is already in the loaded catalog
+    const cachedCard = this.cards().find(c => c.id.toString() === id);
+    if (cachedCard) {
+      return of(cachedCard);
+    }
+
+    // Otherwise, fetch it from the API
+    const params = new HttpParams().set('id', id);
+    return this.http.get<ApiResponse>(this.apiUrl, { params }).pipe(
+      map(response => response.data?.[0] || null)
+    );
   }
 }
