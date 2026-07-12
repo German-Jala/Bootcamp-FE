@@ -1,7 +1,8 @@
-import { Component, input, model, output, OnInit, OnDestroy, viewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, input, output, OnInit, viewChild, ElementRef, AfterViewInit, DestroyRef, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SpinnerComponent } from '../../atoms/spinner/spinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-search-box',
@@ -9,13 +10,14 @@ import { SpinnerComponent } from '../../atoms/spinner/spinner';
   templateUrl: './search-box.html',
   styleUrl: './search-box.css',
 })
-export class SearchBoxComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SearchBoxComponent implements OnInit, AfterViewInit {
+  readonly destroyRef = inject(DestroyRef);
   readonly placeholder = input<string>('Escribe para buscar...');
   readonly loading = input<boolean>(false);
   readonly showResultsInfo = input<boolean>(true);
   readonly autofocus = input<boolean>(true);
 
-  readonly value = model<string>('');
+  readonly value = input<string>('');
   readonly searchSubmit = output<string>();
 
   readonly searchInputElement = viewChild<ElementRef<HTMLInputElement>>('searchInput');
@@ -28,9 +30,9 @@ export class SearchBoxComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(
         debounceTime(400),
         distinctUntilChanged(),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((val) => {
-        this.value.set(val);
         this.searchSubmit.emit(val);
       });
   }
@@ -41,10 +43,6 @@ export class SearchBoxComponent implements OnInit, OnDestroy, AfterViewInit {
         this.searchInputElement()?.nativeElement.focus();
       }, 100);
     }
-  }
-
-  ngOnDestroy(): void {
-    this.inputSubscription?.unsubscribe();
   }
 
   onInput(event: Event): void {
@@ -58,7 +56,6 @@ export class SearchBoxComponent implements OnInit, OnDestroy, AfterViewInit {
       input.value = '';
     }
     this.inputSubject.next('');
-    this.value.set('');
     this.searchSubmit.emit('');
     input?.focus();
   }

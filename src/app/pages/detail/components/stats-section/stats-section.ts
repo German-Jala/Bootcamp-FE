@@ -3,7 +3,6 @@ import { BoxItem } from "../../../../shared/molecules/box-item/box-item";
 
 @Component({
   selector: 'app-stats-section',
-  standalone: true,
   templateUrl: './stats-section.html',
   styleUrl: './stats-section.css',
   imports: [BoxItem],

@@ -10,6 +10,8 @@ import { Button } from "../../shared/atoms/button/button";
 import { EmptyResultsView } from "../../shared/organisms/empty-results-view/empty-results-view";
 import { EffectSection } from "./components/effect-section/effect-section";
 import { PricesSection } from "./components/prices-section/prices-section";
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { catchError, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-detail-page',
@@ -23,7 +25,6 @@ export class DetailPage {
 
   readonly id = input.required<string>();
 
-  readonly card = signal<Card | null>(null);
   readonly loading = signal<boolean>(false);
   readonly error = signal<string | null>(null);
 
@@ -34,36 +35,30 @@ export class DetailPage {
   ];
   readonly activeTab = signal<string>('effect');
 
-  constructor() {
-    // Automatically load card details when the id signal changes
-    effect(() => {
-      const cardId = this.id();
-      if (cardId) {
-        this.loadCard(cardId);
-      }
-    });
-  }
-
-  loadCard(id: string): void {
-    this.loading.set(true);
-    this.error.set(null);
-    this.card.set(null);
-
-    this.cardService.getCardById(id).subscribe({
-      next: (cardData) => {
-        if (cardData) {
-          this.card.set(cardData);
-        } else {
-          this.error.set('La carta no existe en la base de datos.');
-        }
-        this.loading.set(false);
-      },
-      error: () => {
-        this.error.set('Ocurrió un error al cargar los detalles de la carta.');
-        this.loading.set(false);
-      },
-    });
-  }
+  readonly card = toSignal(
+    toObservable(this.id).pipe(
+      tap(() => {
+        this.loading.set(true);
+        this.error.set(null);
+      }),
+      switchMap((cardId) =>
+        this.cardService.getCardById(cardId).pipe(
+          tap((cardData) => {
+            this.loading.set(false);
+            if (!cardData) {
+              this.error.set('La carta no existe en la base de datos.');
+            }
+          }),
+          catchError(() => {
+            this.loading.set(false);
+            this.error.set('Ocurrió un error al cargar los detalles de la carta.');
+            return of(null);
+          })
+        )
+      )
+    ),
+    { initialValue: null }
+  );
 
   goBack(): void {
     this.router.navigate(['/']);

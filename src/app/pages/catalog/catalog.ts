@@ -17,7 +17,9 @@ export class CatalogPage {
   readonly cardService = inject(CardService);
   readonly skeletonCount = Array(12).fill(0);
 
-  readonly emptyResultsDescription = computed(() => `No pudimos encontrar cartas que coincidan con "${this.cardService.searchTerm()}". Intenta con otro término de búsqueda.`);
+  readonly emptyResultsDescription = computed(
+    () => `No pudimos encontrar cartas que coincidan con "${this.cardService.searchTerm()}". Intenta con otro término de búsqueda.`
+  );
 
   onSearch(term: string): void {
     this.cardService.search(term);
