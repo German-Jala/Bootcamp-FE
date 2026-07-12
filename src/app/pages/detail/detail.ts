@@ -5,11 +5,15 @@ import { Card } from '../../models/card.model';
 import { SpinnerComponent } from '../../shared/atoms/spinner/spinner';
 import { BadgeComponent } from '../../shared/atoms/badge/badge';
 import { TabsComponent, TabItem } from '../../shared/molecules/tabs/tabs';
-import { StatsGridComponent } from '../../shared/organisms/stats-grid/stats-grid';
+import { StatsSection } from './components/stats-section/stats-section';
+import { Button } from "../../shared/atoms/button/button";
+import { EmptyResultsView } from "../../shared/organisms/empty-results-view/empty-results-view";
+import { EffectSection } from "./components/effect-section/effect-section";
+import { PricesSection } from "./components/prices-section/prices-section";
 
 @Component({
   selector: 'app-detail-page',
-  imports: [SpinnerComponent, BadgeComponent, TabsComponent, StatsGridComponent],
+  imports: [SpinnerComponent, BadgeComponent, TabsComponent, StatsSection, Button, EmptyResultsView, EffectSection, PricesSection],
   templateUrl: './detail.html',
   styleUrl: './detail.css',
 })

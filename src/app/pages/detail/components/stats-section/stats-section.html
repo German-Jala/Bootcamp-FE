@@ -1,0 +1,31 @@
+<h3 class="text-xs uppercase tracking-wider text-white/50 font-semibold border-b border-white/5 pb-2 mb-4">
+  Estadísticas
+</h3>
+@if (isMonster()) {
+<div class="grid grid-cols-2 gap-4 mt-4">
+  <app-box-item [title]="'ATK'" [text]="`${atk() || '?'}`" [variant]="'big-main'" />
+  <app-box-item [title]="'DEF'" [text]="`${def() || '?'}`" [variant]="'big-main'" />
+  @if (level()) {
+  <div class="col-span-2">
+    <app-box-item [title]="'Nivel / Rango'" [text]="`${level()} 🌟`" [variant]="'big-main'"
+      [textAdditionalClasses]="'text-yellow-400'" />
+  </div>
+  }
+</div>
+} @else {
+<div class="flex flex-col gap-4 text-white/70 text-sm leading-relaxed">
+  <p>Las cartas de tipo <strong class="text-white">{{ type() }}</strong> no poseen estadísticas de ataque o defensa.</p>
+  <div class="bg-white/[0.02] rounded-xl border border-white/5 p-4 flex flex-col gap-3">
+    <div class="flex justify-between border-b border-white/5 pb-2">
+      <span class="text-white/50">Tipo de Carta:</span>
+      <strong class="text-white">{{ type() }}</strong>
+    </div>
+    @if (race()) {
+    <div class="flex justify-between border-none pb-0">
+      <span class="text-white/50">Clasificación:</span>
+      <strong class="text-white">{{ race() }}</strong>
+    </div>
+    }
+  </div>
+</div>
+}
