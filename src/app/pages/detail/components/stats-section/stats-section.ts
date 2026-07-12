@@ -1,12 +1,14 @@
 import { Component, input, computed } from '@angular/core';
+import { BoxItem } from "../../../../shared/molecules/box-item/box-item";
 
 @Component({
-  selector: 'app-stats-grid',
+  selector: 'app-stats-section',
   standalone: true,
-  templateUrl: './stats-grid.html',
-  styleUrl: './stats-grid.css',
+  templateUrl: './stats-section.html',
+  styleUrl: './stats-section.css',
+  imports: [BoxItem],
 })
-export class StatsGridComponent {
+export class StatsSection {
   readonly type = input.required<string>();
   readonly race = input<string>('');
   readonly atk = input<number>();
