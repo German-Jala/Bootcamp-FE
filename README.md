@@ -1,59 +1,53 @@
-# Challenge
+# Yu-Gi-Oh! Card Explorer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1.
+This project is an Angular application built using Angular 22.0.1.
 
-## Development server
+## Getting Started
 
-To start a local development server, run:
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed.
 
+### Installation
+Install the project dependencies:
+```bash
+npm install
+```
+
+### Running the Project
+To start the local development server, run:
+```bash
+npm start
+```
+Or:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, navigate to `http://localhost:4200/` in your browser. The application will automatically reload if you change any source files.
 
-## Code scaffolding
+## API Endpoints Used
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The application retrieves card data from the public **Yu-Gi-Oh! API by YGOPRODeck**.
 
-```bash
-ng generate component component-name
-```
+* **Base URL**: `https://db.ygoprodeck.com/api/v7/cardinfo.php`
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Used Endpoints:
+1. **Get Cards List (with pagination and optional search):**
+   * **Endpoint**: `GET /cardinfo.php`
+   * **Query Parameters**:
+     * `num`: Number of items to retrieve (default: `20`)
+     * `offset`: Pagination offset (default: `0`)
+     * `fname`: Fuzzy search term for searching cards by name (optional)
 
-```bash
-ng generate --help
-```
+2. **Get Card Details by ID:**
+   * **Endpoint**: `GET /cardinfo.php`
+   * **Query Parameters**:
+     * `id`: Unique identifier of the card
 
-## Building
+## Internal Routes
 
-To build the project run:
+The application defines the following client-side routes:
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* **`/` (Root / Catalog)**: Displays the main card catalog with search capabilities and pagination.
+* **`/card/:id` (Card Details)**: Displays detailed information about a specific card, identified by its `id`.
+* **`**` (Catch-all)**: Redirects any undefined or wildcard URL paths back to the Catalog page (`/`).
