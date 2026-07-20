@@ -49,36 +49,11 @@
       </div>
 
       <!-- Reusable Tabs molecule -->
-      <app-tabs [tabs]="tabs" [(activeTabId)]="activeTab" />
+      <app-tabs [tabs]="tabs" [activeTabId]="activeTab()" (tabChange)="onTabChange($event)" />
 
       <!-- Tab contents -->
       <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6 min-h-[200px]">
-        @if (activeTab() === 'effect') {
-        <div class="animate-fade-in">
-          <app-effect-section [description]="c.desc" [archetype]="c.archetype"></app-effect-section>
-        </div>
-        }
-
-        @if (activeTab() === 'stats') {
-        <div class="animate-fade-in">
-          <!-- Stats organism component -->
-          <app-stats-section [type]="c.type" [race]="c.race || ''" [atk]="c.atk" [def]="c.def" [level]="c.level" />
-        </div>
-        }
-
-        @if (activeTab() === 'prices') {
-        <div class="animate-fade-in">
-          <h3 class="text-xs uppercase tracking-wider text-white/50 font-semibold border-b border-white/5 pb-2 mb-4">
-            Precios de Referencia
-          </h3>
-          @if (c.card_prices?.[0]) {
-          @let prices = c.card_prices[0];
-          <app-prices-section [prices]="prices"></app-prices-section>
-          } @else {
-          <p class="text-sm text-white/40 text-center py-6">No hay datos de precios disponibles.</p>
-          }
-        </div>
-        }
+        <router-outlet />
       </div>
     </div>
   </div>

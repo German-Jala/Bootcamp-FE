@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { Card } from '../../../../models/card.model';
+import { Component, computed, inject } from '@angular/core';
+import { DetailPage } from '../../detail';
 
 @Component({
   selector: 'app-effect-section',
@@ -8,6 +8,7 @@ import { Card } from '../../../../models/card.model';
   styleUrl: './effect-section.css',
 })
 export class EffectSection {
-  description = input<string>('');
-  archetype = input<string | undefined>(undefined);
+  private readonly detailPage = inject(DetailPage);
+  readonly description = computed(() => this.detailPage.card()?.desc || '');
+  readonly archetype = computed(() => this.detailPage.card()?.archetype);
 }

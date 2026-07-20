@@ -1,25 +1,24 @@
-import { Component, input, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, input, inject, signal, DestroyRef } from '@angular/core';
+import { RouterLink, RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CardService } from '../../services/card.service';
 import { SpinnerComponent } from '../../shared/atoms/spinner/spinner';
 import { BadgeComponent } from '../../shared/atoms/badge/badge';
 import { TabsComponent, TabItem } from '../../shared/molecules/tabs/tabs';
-import { StatsSection } from './components/stats-section/stats-section';
 import { Button } from "../../shared/atoms/button/button";
 import { EmptyResultsView } from "../../shared/organisms/empty-results-view/empty-results-view";
-import { EffectSection } from "./components/effect-section/effect-section";
-import { PricesSection } from "./components/prices-section/prices-section";
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, of, switchMap, tap } from 'rxjs';
+import { toObservable, toSignal, takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError, of, switchMap, tap, filter } from 'rxjs';
 
 @Component({
   selector: 'app-detail-page',
-  imports: [SpinnerComponent, BadgeComponent, TabsComponent, StatsSection, Button, EmptyResultsView, EffectSection, PricesSection, RouterLink],
+  imports: [SpinnerComponent, BadgeComponent, TabsComponent, Button, EmptyResultsView, RouterLink, RouterOutlet],
   templateUrl: './detail.html',
   styleUrl: './detail.css',
 })
 export class DetailPage {
   private readonly cardService = inject(CardService);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly id = input.required<string>();
 
@@ -32,6 +31,32 @@ export class DetailPage {
     { id: 'prices', label: 'Precios' },
   ];
   readonly activeTab = signal<string>('effect');
+
+  constructor() {
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
+      this.syncActiveTabWithUrl();
+    });
+
+    this.syncActiveTabWithUrl();
+  }
+
+  private syncActiveTabWithUrl(): void {
+    const url = this.router.url;
+    if (url.includes('/stats')) {
+      this.activeTab.set('stats');
+    } else if (url.includes('/prices')) {
+      this.activeTab.set('prices');
+    } else {
+      this.activeTab.set('effect');
+    }
+  }
+
+  onTabChange(tabId: string): void {
+    this.router.navigate(['/card', this.id(), tabId]);
+  }
 
   readonly card = toSignal(
     toObservable(this.id).pipe(
