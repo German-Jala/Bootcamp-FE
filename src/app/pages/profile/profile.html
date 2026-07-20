@@ -1,0 +1,54 @@
+<div class="max-w-md mx-auto my-12 animate-fade-in">
+  <div class="bg-slate-900/40 border border-white/5 rounded-2xl p-8 backdrop-blur-md relative overflow-hidden shadow-2xl shadow-black/60 border-t-yellow-500/30">
+    
+    <!-- Setup Header -->
+    <div class="text-center mb-8 flex flex-col items-center">
+      <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(255,170,0,0.4)] mb-4">
+        🛡️
+      </div>
+      <h2 class="text-2xl font-bold text-white mb-2">Perfil de Duelista</h2>
+      <p class="text-xs text-white/50 leading-relaxed px-4">
+        Configura tu alias para desbloquear el acceso a tu espacio personal y guardar tu colección de cartas.
+      </p>
+    </div>
+
+    <!-- Alert for Redirected Users -->
+    @if (returnUrl()) {
+      <div class="mb-6 bg-yellow-500/10 border border-yellow-500/20 text-yellow-300/90 text-[11px] rounded-lg p-3 flex gap-2.5 items-center">
+        <span>⚠️</span>
+        <p class="m-0 leading-normal">
+          Necesitas definir un alias de duelista antes de poder acceder a tu colección personal.
+        </p>
+      </div>
+    }
+
+    <!-- Form -->
+    <form (submit)="$event.preventDefault(); saveProfile()" class="flex flex-col gap-5">
+      <div class="flex flex-col gap-1.5">
+        <label for="alias" class="text-xs text-white/60 font-semibold tracking-wider uppercase">
+          Alias del Duelista
+        </label>
+        <input
+          type="text"
+          id="alias"
+          placeholder="Escribe tu alias (ej: Yugi, Kaiba)..."
+          [ngModel]="aliasInput()"
+          (ngModelChange)="aliasInput.set($event)"
+          name="alias"
+          required
+          class="w-full bg-white/[0.03] border border-white/10 focus:border-yellow-500/40 rounded-xl px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition-all"
+        />
+      </div>
+
+      <div class="mt-2">
+        <app-button
+          type="submit"
+          [disabled]="!aliasInput().trim()"
+          class="w-full"
+        >
+          Guardar y Continuar
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>

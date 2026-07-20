@@ -11,7 +11,8 @@ export class Button {
   type = input<string>('button');
   click = output<void>();
 
-  onClick() {
+  onClick(event: Event) {
+    event.stopPropagation();
     this.click.emit();
   }
 

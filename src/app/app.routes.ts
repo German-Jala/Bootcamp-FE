@@ -1,9 +1,19 @@
 import { Routes } from '@angular/router';
+import { profileGuard } from './guards/profile.guard';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/catalog/catalog').then((m) => m.CatalogPage),
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile').then((m) => m.ProfilePage),
+  },
+  {
+    path: 'collection',
+    loadComponent: () => import('./pages/collection/collection').then((m) => m.CollectionPage),
+    canActivate: [profileGuard],
   },
   {
     path: 'card/:id',

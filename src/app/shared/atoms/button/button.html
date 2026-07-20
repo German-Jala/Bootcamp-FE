@@ -1,5 +1,5 @@
 <button
     class="bg-white/5 border border-white/10 text-white py-2 px-5 rounded-lg font-medium transition-all duration-200 hover:bg-white/10 hover:border-yellow-400 hover:text-yellow-400 disabled:opacity-40 disabled:cursor-not-allowed"
-    [disabled]="disabled()" [type]="type()" (click)="onClick()">
+    [disabled]="disabled()" [type]="type()" (click)="onClick($event)">
     <ng-content></ng-content>
 </button>

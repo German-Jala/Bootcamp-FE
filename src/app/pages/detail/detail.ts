@@ -1,6 +1,7 @@
 import { Component, input, inject, signal, DestroyRef } from '@angular/core';
 import { RouterLink, RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CardService } from '../../services/card.service';
+import { ProfileService } from '../../services/profile.service';
 import { SpinnerComponent } from '../../shared/atoms/spinner/spinner';
 import { BadgeComponent } from '../../shared/atoms/badge/badge';
 import { TabsComponent, TabItem } from '../../shared/molecules/tabs/tabs';
@@ -19,6 +20,18 @@ export class DetailPage {
   private readonly cardService = inject(CardService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  readonly profileService = inject(ProfileService);
+
+  toggleCollection(): void {
+    const activeCard = this.card();
+    if (!activeCard) return;
+
+    if (this.profileService.isInCollection(activeCard.id)) {
+      this.profileService.removeFromCollection(activeCard.id);
+    } else {
+      this.profileService.addToCollection(activeCard);
+    }
+  }
 
   readonly id = input.required<string>();
 
