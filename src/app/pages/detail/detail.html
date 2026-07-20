@@ -17,11 +17,7 @@
     }
   </div>
 
-  @if (loading()) {
-  <div class="flex items-center justify-center min-h-[300px]">
-    <app-spinner label="Cargando detalles de la carta..."></app-spinner>
-  </div>
-  } @else if (error()) {
+  @if (error()) {
   <app-empty-results-view [title]="'No se pudo cargar la carta'"
     [description]="error() || 'Por favor, intenta buscar de nuevo'"></app-empty-results-view>
 

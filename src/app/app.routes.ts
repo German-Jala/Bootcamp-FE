@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { profileGuard } from './guards/profile.guard';
+import { cardResolver } from './resolvers/card.resolver';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,9 @@ export const routes: Routes = [
   {
     path: 'card/:id',
     loadComponent: () => import('./pages/detail/detail').then((m) => m.DetailPage),
+    resolve: {
+      card: cardResolver,
+    },
     children: [
       {
         path: '',
