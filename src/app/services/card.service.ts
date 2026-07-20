@@ -1,6 +1,7 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { finalize, map, Observable, of } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { map, Observable, of } from 'rxjs';
 import { Card, ApiResponse } from '../models/card.model';
 
 @Injectable({
@@ -10,75 +11,67 @@ export class CardService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
 
-  // State Signals
-  readonly cards = signal<Card[]>([]);
-  readonly loading = signal<boolean>(false);
-  readonly error = signal<string | null>(null);
+  // Search & Pagination signals
   readonly searchTerm = signal<string>('');
   readonly offset = signal<number>(0);
   readonly limit = signal<number>(20);
+
+  // rxResource handles reactive requests
+  readonly cardsResource = rxResource<Card[], { limit: number; offset: number; searchTerm: string }>({
+    params: () => ({
+      limit: this.limit(),
+      offset: this.offset(),
+      searchTerm: this.searchTerm(),
+    }),
+    stream: ({ params }) => {
+      let paramsMap = new HttpParams()
+        .set('num', params.limit.toString())
+        .set('offset', params.offset.toString());
+
+      const term = params.searchTerm.trim();
+      if (term) {
+        paramsMap = paramsMap.set('fname', term);
+      }
+
+      return this.http.get<ApiResponse>(this.apiUrl, { params: paramsMap }).pipe(
+        map((response) => response.data || [])
+      );
+    },
+  });
+
+  // State Signals mapped from rxResource for backwards compatibility
+  readonly cards = computed<Card[]>(() => this.cardsResource.value() || []);
+  readonly loading = computed(() => this.cardsResource.isLoading());
+  readonly error = computed(() => {
+    const errObj = this.cardsResource.error();
+    if (!errObj) return null;
+    return errObj instanceof Error ? errObj.message : String(errObj);
+  });
 
   // Pagination computed properties
   readonly hasNextPage = computed(() => this.cards().length === this.limit());
   readonly hasPrevPage = computed(() => this.offset() > 0);
   readonly currentPage = computed(() => Math.floor(this.offset() / this.limit()) + 1);
 
-  constructor() {
-    this.loadCards();
-  }
-
   search(term: string): void {
     this.searchTerm.set(term);
     this.offset.set(0);
-    this.loadCards();
   }
 
   nextPage(): void {
     if (this.hasNextPage()) {
       this.offset.update((prev) => prev + this.limit());
-      this.loadCards();
     }
   }
 
   prevPage(): void {
     if (this.hasPrevPage()) {
       this.offset.update((prev) => Math.max(0, prev - this.limit()));
-      this.loadCards();
     }
   }
 
   loadCards(): void {
-    this.loading.set(true);
-    this.error.set(null);
-
-    let params = new HttpParams()
-      .set('num', this.limit().toString())
-      .set('offset', this.offset().toString());
-
-    const term = this.searchTerm().trim();
-    if (term) {
-      params = params.set('fname', term);
-    }
-
-    this.http
-      .get<ApiResponse>(this.apiUrl, { params })
-      .pipe(
-        finalize(() => this.loading.set(false))
-      )
-      .subscribe({
-        next: (response) => {
-          this.cards.set(response.data || []);
-        },
-        error: (err) => {
-          if (err.status === 400 || (err.error && err.error.error === 'No card matching your query was found in the database.')) {
-            this.error.set(`No pudimos encontrar cartas que coincidan con "${this.searchTerm()}". Intenta con otro término de búsqueda.`);
-            this.cards.set([]);
-          } else {
-            this.error.set('Ocurrió un error al obtener las cartas. Inténtalo de nuevo.');
-            this.cards.set([]);
-          }
-        },
-      });
+    this.cardsResource.reload();
   }
 
   /**
