@@ -1,5 +1,5 @@
 import { Component, input, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CardService } from '../../services/card.service';
 import { SpinnerComponent } from '../../shared/atoms/spinner/spinner';
 import { BadgeComponent } from '../../shared/atoms/badge/badge';
@@ -14,12 +14,11 @@ import { catchError, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-detail-page',
-  imports: [SpinnerComponent, BadgeComponent, TabsComponent, StatsSection, Button, EmptyResultsView, EffectSection, PricesSection],
+  imports: [SpinnerComponent, BadgeComponent, TabsComponent, StatsSection, Button, EmptyResultsView, EffectSection, PricesSection, RouterLink],
   templateUrl: './detail.html',
   styleUrl: './detail.css',
 })
 export class DetailPage {
-  private readonly router = inject(Router);
   private readonly cardService = inject(CardService);
 
   readonly id = input.required<string>();
@@ -59,9 +58,7 @@ export class DetailPage {
     { initialValue: null }
   );
 
-  goBack(): void {
-    this.router.navigate(['/']);
-  }
+
 
   getBadgeType(type: string): 'monster' | 'spell' | 'trap' {
     const t = type.toLowerCase();

@@ -1,22 +1,16 @@
-import { Component, input, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Card } from '../../../models/card.model';
 import { BadgeComponent } from '../../atoms/badge/badge';
 
 @Component({
   selector: 'app-card-preview',
-  standalone: true,
-  imports: [BadgeComponent],
+  imports: [BadgeComponent, RouterLink],
   templateUrl: './card-preview.html',
   styleUrl: './card-preview.css',
 })
 export class CardPreviewComponent {
-  private readonly router = inject(Router);
   readonly card = input.required<Card>();
-
-  navigateDetail(): void {
-    this.router.navigate(['/card', this.card().id]);
-  }
 
   getSuperType(): 'MONSTER' | 'SPELL' | 'TRAP' {
     const t = this.card().type.toLowerCase();
