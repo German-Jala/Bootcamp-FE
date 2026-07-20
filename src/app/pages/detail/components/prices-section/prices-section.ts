@@ -2,10 +2,11 @@ import { Component, computed, inject } from '@angular/core';
 import { DetailPage } from '../../detail';
 import { CardPrice } from '../../../../models/card.model';
 import { BoxItem } from "../../../../shared/molecules/box-item/box-item";
+import { CardPricePipe } from '../../../../shared/pipes/card-price.pipe';
 
 @Component({
   selector: 'app-prices-section',
-  imports: [BoxItem],
+  imports: [BoxItem, CardPricePipe],
   templateUrl: './prices-section.html',
   styleUrl: './prices-section.css',
 })

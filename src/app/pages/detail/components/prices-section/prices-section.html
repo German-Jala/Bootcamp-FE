@@ -1,6 +1,6 @@
 <div class="grid grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-4 mt-4">
-    <app-box-item title="Cardmarket" [text]="`$ ${prices().cardmarket_price}`" />
-    <app-box-item title="TCGPlayer" [text]="`$ ${prices().tcgplayer_price}`" />
-    <app-box-item title="eBay" [text]="`$ ${prices().ebay_price}`" />
-    <app-box-item title="Amazon" [text]="`$ ${prices().amazon_price}`" />
+    <app-box-item title="Cardmarket" [text]="prices().cardmarket_price | cardPrice" />
+    <app-box-item title="TCGPlayer" [text]="prices().tcgplayer_price | cardPrice" />
+    <app-box-item title="eBay" [text]="prices().ebay_price | cardPrice" />
+    <app-box-item title="Amazon" [text]="prices().amazon_price | cardPrice" />
 </div>

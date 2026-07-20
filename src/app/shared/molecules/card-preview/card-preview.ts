@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { Card } from '../../../models/card.model';
 import { BadgeComponent } from '../../atoms/badge/badge';
 import { HighlightCardDirective } from '../../directives/highlight-card.directive';
+import { CardPricePipe } from '../../pipes/card-price.pipe';
 
 @Component({
   selector: 'app-card-preview',
-  imports: [BadgeComponent, RouterLink, HighlightCardDirective],
+  imports: [BadgeComponent, RouterLink, HighlightCardDirective, CardPricePipe],
   templateUrl: './card-preview.html',
   styleUrl: './card-preview.css',
 })

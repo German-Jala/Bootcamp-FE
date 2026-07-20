@@ -21,8 +21,15 @@
     <h4 class="m-0 text-sm font-semibold text-white truncate w-full" [title]="card().name">
       {{ card().name }}
     </h4>
-    <p class="m-0 text-[11px] text-white/50 truncate">
-      {{ card().type }}
-    </p>
+    <div class="flex justify-between items-center w-full mt-1">
+      <p class="m-0 text-[11px] text-white/50 truncate max-w-[70%]">
+        {{ card().type }}
+      </p>
+      @if (card().card_prices?.[0]?.cardmarket_price) {
+        <span class="text-[10px] font-bold text-yellow-400/90 whitespace-nowrap">
+          {{ card().card_prices[0].cardmarket_price | cardPrice }}
+        </span>
+      }
+    </div>
   </div>
 </div>
