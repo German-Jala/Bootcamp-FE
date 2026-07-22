@@ -7,6 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CardPricePipe implements PipeTransform {
   transform(value: string | number | undefined | null): string {
+
     if (value === undefined || value === null) {
       return 'N/D';
     }

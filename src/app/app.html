@@ -1,20 +1,25 @@
 <header class="app-header">
   <div class="header-container">
     <div class="flex items-center gap-4">
-      <div class="brand">
+      <div class="brand cursor-pointer" routerLink="/">
         <span class="brand-icon">⚔️</span>
         <h1 class="app-title">Duelist Codex</h1>
       </div>
-      <span class="subtitle text-white/50 text-xs border-l border-white/10 pl-4 py-1 hidden sm:inline">Explorador de Cartas Yu-Gi-Oh!</span>
+      <span class="subtitle text-white/50 text-xs border-l border-white/10 pl-4 py-1 hidden sm:inline">Explorador de
+        Cartas Yu-Gi-Oh!</span>
     </div>
     <nav class="flex gap-6 text-sm font-semibold items-center">
-      <a routerLink="/" routerLinkActive="text-yellow-400" [routerLinkActiveOptions]="{exact: true}" class="text-white/60 hover:text-white transition no-underline">Catálogo</a>
-      <a routerLink="/collection" routerLinkActive="text-yellow-400" class="text-white/60 hover:text-white transition no-underline">Mi Colección</a>
-      <a routerLink="/profile" routerLinkActive="text-yellow-400" class="text-white/60 hover:text-white transition no-underline">Perfil</a>
+      <a routerLink="/" routerLinkActive="text-yellow-400" [routerLinkActiveOptions]="{exact: true}"
+        class="text-white/60 hover:text-white transition no-underline">Catálogo</a>
+      <a routerLink="/collection" routerLinkActive="text-yellow-400"
+        class="text-white/60 hover:text-white transition no-underline">Mi Colección</a>
+      <a routerLink="/profile" routerLinkActive="text-yellow-400"
+        class="text-white/60 hover:text-white transition no-underline">Perfil</a>
       @if (profileService.isConfigured()) {
-        <button (click)="logout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 hover:border-red-500/40 rounded px-2.5 py-1 text-xs transition cursor-pointer font-semibold">
-          Salir
-        </button>
+      <button (click)="logout()"
+        class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 hover:border-red-500/40 rounded px-2.5 py-1 text-xs transition cursor-pointer font-semibold">
+        Salir
+      </button>
       }
     </nav>
   </div>
