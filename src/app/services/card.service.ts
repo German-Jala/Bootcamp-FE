@@ -1,12 +1,10 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { signal, computed, inject, Service } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { map, Observable, of } from 'rxjs';
 import { Card, ApiResponse } from '../models/card.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class CardService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
@@ -17,7 +15,10 @@ export class CardService {
   readonly limit = signal<number>(20);
 
   // rxResource handles reactive requests
-  readonly cardsResource = rxResource<Card[], { limit: number; offset: number; searchTerm: string }>({
+  readonly cardsResource = rxResource<
+    Card[],
+    { limit: number; offset: number; searchTerm: string }
+  >({
     params: () => ({
       limit: this.limit(),
       offset: this.offset(),

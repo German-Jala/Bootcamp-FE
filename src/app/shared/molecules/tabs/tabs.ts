@@ -7,7 +7,6 @@ export interface TabItem {
 
 @Component({
   selector: 'app-tabs',
-  standalone: true,
   templateUrl: './tabs.html',
   styleUrl: './tabs.css',
 })

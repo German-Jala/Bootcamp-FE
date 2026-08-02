@@ -1,9 +1,7 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { signal, computed, Service } from '@angular/core';
 import { Card } from '../models/card.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ProfileService {
   readonly duelistAlias = signal<string>(localStorage.getItem('duelistAlias') || '');
   readonly isConfigured = computed(() => !!this.duelistAlias().trim());

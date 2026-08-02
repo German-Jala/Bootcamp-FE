@@ -2,8 +2,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'cardPrice',
-  pure: true,
-  standalone: true,
 })
 export class CardPricePipe implements PipeTransform {
   transform(value: string | number | undefined | null): string {

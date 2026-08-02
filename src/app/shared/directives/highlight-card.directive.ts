@@ -3,7 +3,6 @@ import { Card } from '../../models/card.model';
 
 @Directive({
   selector: '[appHighlightCard]',
-  standalone: true,
 })
 export class HighlightCardDirective implements OnInit {
   private readonly el = inject(ElementRef);
@@ -22,7 +21,6 @@ export class HighlightCardDirective implements OnInit {
     const cardData = this.card();
     if (!cardData) return false;
 
-    // Highlight monsters with ATK >= threshold
     if (cardData.atk !== undefined && cardData.atk >= this.atkThreshold()) {
       return true;
     }
@@ -31,7 +29,6 @@ export class HighlightCardDirective implements OnInit {
   }
 
   private applyHighlight(): void {
-    // Add golden border and box-shadow glow
     this.renderer.setStyle(this.el.nativeElement, 'border-color', 'rgba(234, 179, 8, 0.6)');
     this.renderer.setStyle(
       this.el.nativeElement,

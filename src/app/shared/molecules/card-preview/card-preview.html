@@ -1,22 +1,20 @@
-<div [appHighlightCard]="card()" class="flex flex-col h-full bg-slate-900/40 border border-white/5 hover:border-yellow-500/40 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50 hover:bg-slate-900/60 relative" [routerLink]="['/card', card().id]">
+<div [appHighlightCard]="card()"
+  class="flex flex-col h-full bg-slate-900/40 border border-white/5 hover:border-yellow-500/40 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50 hover:bg-slate-900/60 relative"
+  [routerLink]="['/card', card().id]">
   <div class="relative aspect-[1/1.45] bg-black/40 flex items-center justify-center overflow-hidden">
     @if (card().card_images?.[0]) {
-      <img
-        [src]="card().card_images[0].image_url_small"
-        [alt]="card().name"
-        loading="lazy"
-        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-      />
+    <img [src]="card().card_images[0].image_url_small" [alt]="card().name" loading="lazy"
+      class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
     } @else {
-      <span class="text-xs text-white/40">No Image</span>
+    <span class="text-xs text-white/40">No Image</span>
     }
-    
+
     <!-- Super type Badge -->
     <div class="absolute bottom-2 right-2">
       <app-badge [type]="getBadgeType()">{{ getSuperType() }}</app-badge>
     </div>
   </div>
-  
+
   <div class="p-4 flex flex-col gap-1 flex-grow">
     <h4 class="m-0 text-sm font-semibold text-white truncate w-full" [title]="card().name">
       {{ card().name }}
@@ -26,9 +24,9 @@
         {{ card().type }}
       </p>
       @if (card().card_prices?.[0]?.cardmarket_price) {
-        <span class="text-[10px] font-bold text-yellow-400/90 whitespace-nowrap">
-          {{ card().card_prices[0].cardmarket_price | cardPrice }}
-        </span>
+      <span class="text-[10px] font-bold text-yellow-400/90 whitespace-nowrap">
+        {{ card().card_prices[0].cardmarket_price | cardPrice }}
+      </span>
       }
     </div>
   </div>
