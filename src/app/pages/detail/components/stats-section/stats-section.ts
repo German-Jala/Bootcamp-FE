@@ -1,12 +1,13 @@
 import { Component, computed, inject } from '@angular/core';
 import { DetailPage } from '../../detail';
 import { BoxItem } from "../../../../shared/molecules/box-item/box-item";
+import { AtkDefPipe } from '../../../../shared/pipes/atk-def.pipe';
 
 @Component({
   selector: 'app-stats-section',
   templateUrl: './stats-section.html',
   styleUrl: './stats-section.css',
-  imports: [BoxItem],
+  imports: [BoxItem, AtkDefPipe],
 })
 export class StatsSection {
   private readonly detailPage = inject(DetailPage);
