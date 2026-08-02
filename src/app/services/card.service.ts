@@ -1,7 +1,7 @@
 import { signal, computed, inject, Service } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { rxResource } from '@angular/core/rxjs-interop';
-import { map, Observable, of } from 'rxjs';
+import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, map, Observable, of } from 'rxjs';
 import { Card, ApiResponse } from '../models/card.model';
 
 @Service()
@@ -9,9 +9,17 @@ export class CardService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
 
-  readonly searchTerm = signal<string>('');
   readonly offset = signal<number>(0);
   readonly limit = signal<number>(20);
+
+  // Step 3: RxJS & Signals Interoperability: toObservable -> debounceTime + distinctUntilChanged -> toSignal
+  // Step 3: 
+  readonly searchTermInput = signal<string>('');
+  private readonly debouncedSearch$ = toObservable(this.searchTermInput).pipe(
+    debounceTime(350),
+    distinctUntilChanged(),
+  );
+  readonly searchTerm = toSignal(this.debouncedSearch$, { initialValue: '' });
 
   // Step 2: Use rxResource for reactive requests
   readonly cardsResource = rxResource<
@@ -21,6 +29,7 @@ export class CardService {
     params: () => ({
       limit: this.limit(),
       offset: this.offset(),
+      // Step 3: Signal that we are using, this signal had passed debounceTime + distinctUntilChanged
       searchTerm: this.searchTerm(),
     }),
     stream: ({ params }) => {
@@ -53,8 +62,9 @@ export class CardService {
   readonly currentPage = computed(() => Math.floor(this.offset() / this.limit()) + 1);
 
   search(term: string): void {
-    this.searchTerm.set(term);
+    this.searchTermInput.set(term);
     this.offset.set(0);
+    console.log(term)
   }
 
   nextPage(): void {
