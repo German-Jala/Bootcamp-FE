@@ -1,6 +1,8 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
+// Step 2: Intercept errors, don't repeat yourself DRY principle
+// Step 2: Deliver a comprenhensive messages to the user based on the error
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {

@@ -17,6 +17,7 @@ export class AtkDefPipe implements PipeTransform {
       return '?';
     }
 
+    // Step 1: Deliver formatted values
     return numValue.toLocaleString('es-BO');
     // LocaleString could made a standard string
     // return numValue.toLocaleString('en-US');

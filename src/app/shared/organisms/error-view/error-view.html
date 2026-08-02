@@ -3,7 +3,7 @@
     <div class="text-5xl mb-6">⚠️</div>
     <h3 class="text-xl font-bold text-white mb-2">¡Ups! Algo salió mal</h3>
     <p class="text-white/60 max-w-sm mb-6 leading-relaxed">{{ errorMessage() }}</p>
-    <button
-        class="bg-gradient-to-r from-yellow-400 to-amber-500 text-slate-950 py-3 px-6 font-bold rounded-lg transition-all duration-200 hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] hover:scale-[1.03]"
-        (click)="retry()">Intentar de nuevo</button>
+    <app-button (click)="retry()">
+        Intentar de nuevo
+    </app-button>
 </div>

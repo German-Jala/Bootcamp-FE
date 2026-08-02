@@ -3,6 +3,7 @@
 </h3>
 @if (isMonster()) {
 <div class="grid grid-cols-2 gap-4 mt-4">
+  <!-- Step 1: Pipe is applied -->
   <app-box-item [title]="'ATK'" [text]="atk() | atkDef" [variant]="'big-main'" />
   <app-box-item [title]="'DEF'" [text]="def() | atkDef" [variant]="'big-main'" />
   @if (level()) {
