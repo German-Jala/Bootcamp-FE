@@ -1,4 +1,4 @@
-import { signal, computed, inject, Service } from '@angular/core';
+import { signal, computed, inject, Service, linkedSignal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, map, Observable, of } from 'rxjs';
@@ -13,24 +13,41 @@ export class CardService {
   readonly limit = signal<number>(20);
 
   // Step 3: RxJS & Signals Interoperability: toObservable -> debounceTime + distinctUntilChanged -> toSignal
-  // Step 3: 
   readonly searchTermInput = signal<string>('');
   private readonly debouncedSearch$ = toObservable(this.searchTermInput).pipe(
     debounceTime(350),
-    distinctUntilChanged(),
+    distinctUntilChanged()
   );
   readonly searchTerm = toSignal(this.debouncedSearch$, { initialValue: '' });
 
-  // Step 2: Use rxResource for reactive requests
+  // Step 4: Multi-criteria filter signals
+  readonly selectedType = signal<string>('');
+
+  // Step 4: linkedSignal for editable derived state (resets attribute if type is Spell or Trap, but remains user writable)
+  readonly selectedAttribute = linkedSignal<string, string>({
+    source: this.selectedType,
+    computation: (type, previous) => {
+      if (type.includes('Spell') || type.includes('Trap')) {
+        return '';
+      }
+      return previous?.value ?? '';
+    },
+  });
+
+  readonly selectedRace = signal<string>('');
+
+  // Step 2 & Step 4: rxResource combining multi-criteria search parameters into a single source of truth
   readonly cardsResource = rxResource<
     Card[],
-    { limit: number; offset: number; searchTerm: string }
+    { limit: number; offset: number; searchTerm: string; type: string; attribute: string; race: string }
   >({
     params: () => ({
       limit: this.limit(),
       offset: this.offset(),
-      // Step 3: Signal that we are using, this signal had passed debounceTime + distinctUntilChanged
       searchTerm: this.searchTerm(),
+      type: this.selectedType(),
+      attribute: this.selectedAttribute(),
+      race: this.selectedRace(),
     }),
     stream: ({ params }) => {
       let paramsMap = new HttpParams()
@@ -41,6 +58,15 @@ export class CardService {
       if (term) {
         paramsMap = paramsMap.set('fname', term);
       }
+      if (params.type) {
+        paramsMap = paramsMap.set('type', params.type);
+      }
+      if (params.attribute) {
+        paramsMap = paramsMap.set('attribute', params.attribute);
+      }
+      if (params.race) {
+        paramsMap = paramsMap.set('race', params.race);
+      }
 
       return this.http.get<ApiResponse>(this.apiUrl, { params: paramsMap }).pipe(
         map((response) => response.data || [])
@@ -48,23 +74,59 @@ export class CardService {
     },
   });
 
-  // Step 2: Use at least RxSource and its derived computed properties
   readonly cards = computed<Card[]>(() => this.cardsResource.value() || []);
   readonly loading = computed(() => this.cardsResource.isLoading());
   readonly error = computed(() => {
     const errObj = this.cardsResource.error();
     if (!errObj) return null;
-    return errObj instanceof Error ? errObj.message : String('Ups! Algo salio mal, intentalo mas tarde');
+    return errObj instanceof Error ? errObj.message : String('Ups! Algo salió mal, inténtalo más tarde');
   });
 
   readonly hasNextPage = computed(() => this.cards().length === this.limit());
   readonly hasPrevPage = computed(() => this.offset() > 0);
   readonly currentPage = computed(() => Math.floor(this.offset() / this.limit()) + 1);
 
+  readonly hasActiveFilters = computed(() => {
+    return !!(this.searchTerm() || this.selectedType() || this.selectedAttribute() || this.selectedRace());
+  });
+
+  readonly activeFiltersSummary = computed(() => {
+    const parts: string[] = [];
+    if (this.searchTerm()) parts.push(`Nombre: "${this.searchTerm()}"`);
+    if (this.selectedType()) parts.push(`Tipo: "${this.selectedType()}"`);
+    if (this.selectedAttribute()) parts.push(`Atributo: "${this.selectedAttribute()}"`);
+    if (this.selectedRace()) parts.push(`Clasificación: "${this.selectedRace()}"`);
+    return parts.length > 0 ? parts.join(' • ') : '';
+  });
+
   search(term: string): void {
     this.searchTermInput.set(term);
     this.offset.set(0);
-    console.log(term)
+  }
+
+  // Step 4: Signals Variables
+  setType(type: string): void {
+    this.selectedType.set(type);
+    this.offset.set(0);
+  }
+
+  setAttribute(attribute: string): void {
+    this.selectedAttribute.set(attribute);
+    this.offset.set(0);
+  }
+
+  setRace(race: string): void {
+    this.selectedRace.set(race);
+    this.offset.set(0);
+  }
+  // -------------
+
+  resetFilters(): void {
+    this.searchTermInput.set('');
+    this.selectedType.set('');
+    this.selectedAttribute.set('');
+    this.selectedRace.set('');
+    this.offset.set(0);
   }
 
   nextPage(): void {
@@ -84,14 +146,14 @@ export class CardService {
   }
 
   getCardById(id: string): Observable<Card | null> {
-    const cachedCard = this.cards().find(c => c.id.toString() === id);
+    const cachedCard = this.cards().find((c) => c.id.toString() === id);
     if (cachedCard) {
       return of(cachedCard);
     }
 
     const params = new HttpParams().set('id', id);
     return this.http.get<ApiResponse>(this.apiUrl, { params }).pipe(
-      map(response => response.data?.[0] || null)
+      map((response) => response.data?.[0] || null)
     );
   }
 }

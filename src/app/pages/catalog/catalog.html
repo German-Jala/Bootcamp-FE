@@ -1,31 +1,27 @@
 <div class="flex flex-col gap-8 w-full">
-  <!-- Search box organism -->
   <app-search-box placeholder="Escribe el nombre de una carta (ej: Dragon, Magician)..."
     [loading]="cardService.loading()" [value]="cardService.searchTermInput()" (searchSubmit)="onSearch($event)" />
 
-  <!-- Main content loader/error/grid states -->
+  <!-- Step 4: Bar is applied -->
+  <app-filter-bar />
+
   @if (cardService.loading()) {
-  <!-- Skeleton loader state -->
   <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-8 py-4">
     @for (item of skeletonCount; track $index) {
     <app-skeleton-card></app-skeleton-card>
     }
   </div>
   } @else if (cardService.error()) {
-  <!-- Error view -->
   <app-error-view [errorMessage]="cardService.error() || 'Error desconocido'" (onRetry)="cardService.loadCards()" />
   } @else if (cardService.cards().length === 0) {
-  <!-- Empty results view -->
   <app-empty-results-view [title]="'No se encontraron cartas'" [description]="emptyResultsDescription()" />
   } @else {
-  <!-- Grid elements -->
   <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-8 py-4">
     @for (card of cardService.cards(); track card.id) {
     <app-card-preview [card]="card" />
     }
   </div>
 
-  <!-- Paging footer -->
   <div class="flex justify-center items-center gap-6 mt-12 pb-8">
     <app-button [disabled]="!cardService.hasPrevPage() || cardService.loading()" (click)="cardService.prevPage()">
       ← Anterior
