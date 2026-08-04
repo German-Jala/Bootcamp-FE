@@ -1,0 +1,73 @@
+@if (cardService.focusedCard(); as c) {
+<div
+  class="relative bg-gradient-to-r from-yellow-500/10 via-amber-500/5 to-slate-900/60 border border-yellow-500/30 rounded-2xl p-4 md:p-5 shadow-[0_4px_25px_rgba(255,215,0,0.1)] backdrop-blur-md transition-all duration-300">
+  <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+    1 <div class="flex items-center gap-4 w-full lg:w-auto">
+      <div class="relative w-16 h-24 rounded-lg overflow-hidden flex-shrink-0 border border-yellow-500/40 shadow-md">
+        @if (c.card_images?.[0]) {
+        <img [src]="c.card_images[0].image_url_small" [alt]="c.name" class="w-full h-full object-cover" />
+        } @else {
+        <div class="w-full h-full bg-black/40 flex items-center justify-center text-[10px] text-white/40">No img</div>
+        }
+      </div>
+
+      <div class="flex flex-col gap-1 flex-1">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider flex items-center gap-1">
+            📌 Carta en Foco
+          </span>
+          <span class="text-[10px] text-white/40 bg-white/5 px-2 py-0.5 rounded-full">Fija durante tus búsquedas</span>
+        </div>
+        <h3 class="text-base font-bold text-white leading-tight truncate max-w-[280px]">
+          {{ c.name }}
+        </h3>
+        <div class="flex flex-wrap items-center gap-2 text-xs text-white/70 mt-0.5">
+          <app-badge [type]="getBadgeType(c.type)">{{ c.type }}</app-badge>
+          @if (c.atk !== undefined && c.atk !== null) {
+          <span class="text-white/80 font-mono text-xs">ATK: <strong class="text-yellow-400">{{ c.atk | atkDef
+              }}</strong></span>
+          }
+          @if (c.def !== undefined && c.def !== null) {
+          <span class="text-white/80 font-mono text-xs">DEF: <strong class="text-white">{{ c.def | atkDef
+              }}</strong></span>
+          }
+          @if (c.card_prices?.[0]?.cardmarket_price) {
+          <span
+            class="text-xs font-bold text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded-md border border-yellow-500/20">
+            {{ c.card_prices[0].cardmarket_price | cardPrice }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+
+
+    <div
+      class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-end border-t lg:border-t-0 border-white/5 pt-3 lg:pt-0">
+      <!-- Step 5 -->
+      <button (click)="cardService.toggleFocusedCandidate()"
+        class="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl transition-all border cursor-pointer"
+        [class.bg-yellow-500\/20]="cardService.isFocusedCandidate()"
+        [class.text-yellow-400]="cardService.isFocusedCandidate()"
+        [class.border-yellow-500\/50]="cardService.isFocusedCandidate()"
+        [class.bg-white\/5]="!cardService.isFocusedCandidate()"
+        [class.text-white\/70]="!cardService.isFocusedCandidate()"
+        [class.border-white\/10]="!cardService.isFocusedCandidate()">
+        <span>{{ cardService.isFocusedCandidate() ? '★ Candidata a Mazo' : '☆ Marcar Candidata' }}</span>
+      </button>
+
+      <input type="text" [value]="cardService.focusedNotes()" (input)="onNotesInput($event)" placeholder="Nota local..."
+        class="text-xs bg-slate-950/60 border border-white/10 text-white rounded-xl px-3 py-2 focus:outline-none focus:border-yellow-400/50 w-full sm:w-44 transition-all" />
+
+      <app-button [routerLink]="['/card', c.id]">
+        Ver Detalle
+      </app-button>
+
+      <button (click)="cardService.clearFocusedCard()" title="Quitar de foco"
+        class="text-xs text-white/50 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-3 py-2 transition-all cursor-pointer">
+        ✕ Quitar Foco
+      </button>
+    </div>
+  </div>
+</div>
+}

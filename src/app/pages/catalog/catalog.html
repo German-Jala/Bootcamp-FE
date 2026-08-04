@@ -1,4 +1,7 @@
 <div class="flex flex-col gap-8 w-full">
+  <!-- Step 5: Focused Card Banner retains candidate card selection across search changes -->
+  <app-focused-card-banner />
+
   <app-search-box placeholder="Escribe el nombre de una carta (ej: Dragon, Magician)..."
     [loading]="cardService.loading()" [value]="cardService.searchTermInput()" (searchSubmit)="onSearch($event)" />
 

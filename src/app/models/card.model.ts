@@ -38,3 +38,11 @@ export interface ApiResponse {
     next_page_offset?: number;
   };
 }
+
+// Step 5: focused-card-state
+export interface FocusedCardState {
+  card: Card;
+  isCandidate: boolean;
+  notes?: string;
+}
+

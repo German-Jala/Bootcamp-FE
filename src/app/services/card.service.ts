@@ -2,7 +2,7 @@ import { signal, computed, inject, Service, linkedSignal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, map, Observable, of } from 'rxjs';
-import { Card, ApiResponse } from '../models/card.model';
+import { Card, ApiResponse, FocusedCardState } from '../models/card.model';
 
 @Service()
 export class CardService {
@@ -73,6 +73,53 @@ export class CardService {
       );
     },
   });
+
+  // Step 5: Linked Signal
+  readonly focusedCardState = linkedSignal<Card[] | undefined, FocusedCardState | null>({
+    source: () => this.cardsResource.value(),
+    computation: (_cards, previous) => {
+      if (previous && previous.value !== undefined) {
+        return previous.value;
+      }
+      // By default, no card is focused until explicitly selected by the user
+      return null;
+    },
+  });
+
+  readonly focusedCard = computed<Card | null>(() => this.focusedCardState()?.card ?? null);
+  readonly isFocusedCandidate = computed<boolean>(() => this.focusedCardState()?.isCandidate ?? false);
+  readonly focusedNotes = computed<string>(() => this.focusedCardState()?.notes ?? '');
+
+  // Step 5: Set focused card (when user clicks on a card)
+  setFocusedCard(card: Card): void {
+    this.focusedCardState.update((prev) => {
+      if (prev && prev.card.id === card.id) {
+        return prev;
+      }
+      return { card, isCandidate: false, notes: '' };
+    });
+  }
+
+  // Step 5: Toggle focused card (when user clicks on the focus button)
+  toggleFocusedCandidate(): void {
+    this.focusedCardState.update((prev) => {
+      if (!prev) return null;
+      return { ...prev, isCandidate: !prev.isCandidate };
+    });
+  }
+
+  // Step 5: Update focused card notes (when user writes notes in the focused card)
+  updateFocusedNotes(notes: string): void {
+    this.focusedCardState.update((prev) => {
+      if (!prev) return null;
+      return { ...prev, notes };
+    });
+  }
+
+  // Step 5: Clear focused card (when user clicks the clear button)
+  clearFocusedCard(): void {
+    this.focusedCardState.set(null);
+  }
 
   readonly cards = computed<Card[]>(() => this.cardsResource.value() || []);
   readonly loading = computed(() => this.cardsResource.isLoading());
@@ -157,3 +204,4 @@ export class CardService {
     );
   }
 }
+

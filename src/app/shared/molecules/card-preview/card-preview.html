@@ -1,13 +1,32 @@
 <div [appHighlightCard]="card()"
-  class="flex flex-col h-full bg-slate-900/40 border border-white/5 hover:border-yellow-500/40 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50 hover:bg-slate-900/60 relative"
+  class="flex flex-col h-full bg-slate-900/40 border rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50 relative group"
+  [class.border-yellow-500\/60]="isFocused()" [class.border-white\/5]="!isFocused()"
   [routerLink]="['/card', card().id]">
   <div class="relative aspect-[1/1.45] bg-black/40 flex items-center justify-center overflow-hidden">
     @if (card().card_images?.[0]) {
     <img [src]="card().card_images[0].image_url_small" [alt]="card().name" loading="lazy"
-      class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
     } @else {
     <span class="text-xs text-white/40">No Image</span>
     }
+
+    <!-- Focused Badge Indicator -->
+    @if (isFocused()) {
+    <div
+      class="absolute top-2 left-2 bg-yellow-500 text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-md shadow-md flex items-center gap-1 z-10">
+      📌 En Foco
+    </div>
+    }
+
+    <!-- Step 5: Quick Action: Focus / Unfocus button -->
+    <button (click)="onFocusClick($event)" [title]="isFocused() ? 'Quitar de foco' : 'Poner en foco'"
+      class="absolute top-2 right-2 text-[11px] font-semibold px-2 py-1 rounded-lg backdrop-blur-md transition-all border opacity-90 sm:opacity-0 group-hover:opacity-100 z-10 flex items-center gap-1 cursor-pointer"
+      [class.bg-red-500\/80]="isFocused()" [class.hover:bg-red-600]="isFocused()" [class.text-white]="isFocused()"
+      [class.border-red-400\/40]="isFocused()" [class.bg-slate-900\/80]="!isFocused()"
+      [class.hover:bg-yellow-500]="!isFocused()" [class.hover:text-slate-950]="!isFocused()"
+      [class.text-white]="!isFocused()" [class.border-white\/20]="!isFocused()">
+      {{ isFocused() ? '✕ Quitar' : '📌 Enfocar' }}
+    </button>
 
     <!-- Super type Badge -->
     <div class="absolute bottom-2 right-2">

@@ -7,10 +7,12 @@ import { SkeletonCard } from '../../shared/molecules/skeleton-card/skeleton-card
 import { ErrorView } from '../../shared/organisms/error-view/error-view';
 import { EmptyResultsView } from '../../shared/organisms/empty-results-view/empty-results-view';
 import { Button } from '../../shared/atoms/button/button';
+import { FocusedCardBannerComponent } from '../../shared/molecules/focused-card-banner/focused-card-banner';
 
 @Component({
   selector: 'app-catalog-page',
   imports: [
+    FocusedCardBannerComponent,
     SearchBoxComponent,
     FilterBarComponent,
     CardPreviewComponent,
