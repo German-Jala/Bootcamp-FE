@@ -7,13 +7,13 @@
     </app-button>
 
     @if (card()) {
-      <app-button (click)="toggleCollection()">
-        @if (profileService.isInCollection(card()!.id)) {
-          ⭐ Quitar de mi Colección
-        } @else {
-          ☆ Añadir a mi Colección
-        }
-      </app-button>
+    <app-button (click)="toggleCollection()">
+      @if (profileService.isInCollection(card()!.id)) {
+      ⭐ Quitar de mi Colección
+      } @else {
+      ☆ Añadir a mi Colección
+      }
+    </app-button>
     }
   </div>
 
@@ -62,6 +62,23 @@
       <!-- Tab contents -->
       <div class="bg-white/[0.02] border border-white/5 rounded-xl p-6 min-h-[200px]">
         <router-outlet />
+      </div>
+
+      <!-- Step 6: Deferred Secondary Information (Market Prices) with @defer -->
+      <div class="mt-6 border-t border-white/5 pt-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-yellow-400/80 mb-2">
+          💰 Precios de Mercado (Información Secundaria)
+        </h4>
+        @defer (on idle) {
+        <app-market-prices [cardPrice]="c.card_prices?.[0]" />
+        } @loading (minimum 500ms) {
+        <div class="flex items-center gap-3 p-4 bg-slate-900/40 rounded-xl border border-white/5 animate-pulse">
+          <app-spinner />
+          <span class="text-xs text-white/50 font-medium">Cargando información secundaria de precios...</span>
+        </div>
+        } @placeholder {
+        <div class="text-xs text-white/30 p-2">Precios diferidos disponibles</div>
+        }
       </div>
     </div>
   </div>

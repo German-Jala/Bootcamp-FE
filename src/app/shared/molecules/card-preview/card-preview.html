@@ -4,7 +4,7 @@
   [routerLink]="['/card', card().id]">
   <div class="relative aspect-[1/1.45] bg-black/40 flex items-center justify-center overflow-hidden">
     @if (card().card_images?.[0]) {
-    <img [src]="card().card_images[0].image_url_small" [alt]="card().name" loading="lazy"
+    <img [src]="card().card_images[0].image_url_small" [alt]="card().name"
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
     } @else {
     <span class="text-xs text-white/40">No Image</span>

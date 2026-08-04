@@ -6,12 +6,23 @@ import { BadgeComponent } from '../../shared/atoms/badge/badge';
 import { TabsComponent, TabItem } from '../../shared/molecules/tabs/tabs';
 import { Button } from "../../shared/atoms/button/button";
 import { EmptyResultsView } from "../../shared/organisms/empty-results-view/empty-results-view";
+import { SpinnerComponent } from '../../shared/atoms/spinner/spinner';
+import { MarketPricesComponent } from './components/market-prices/market-prices';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-detail-page',
-  imports: [BadgeComponent, TabsComponent, Button, EmptyResultsView, RouterLink, RouterOutlet],
+  imports: [
+    BadgeComponent,
+    TabsComponent,
+    Button,
+    EmptyResultsView,
+    SpinnerComponent,
+    MarketPricesComponent,
+    RouterLink,
+    RouterOutlet
+  ],
   templateUrl: './detail.html',
   styleUrl: './detail.css',
 })
